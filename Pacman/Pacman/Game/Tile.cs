@@ -18,6 +18,7 @@ namespace Pacman
         int myDirection;
 
         /// <summary>
+        /// . = Empty;
         /// # = Block;
         /// </summary>
         public char TileType
@@ -26,46 +27,11 @@ namespace Pacman
             set => myTileType = value;
         }
         /// <summary>
-        /// 1 = Left/Up, Corner;
-        /// 2 = Right/Up, Corner;
-        /// 3 = Left/Down, Corner;
-        /// 4 = Right/Down, Corner;
-        /// 5 = Left/Right, Wall;
-        /// 6 = Right/Left, Wall;
-        /// 7 = Up/Down, Wall,
-        /// 8 = Down/Up, Wall;
+        /// 
         /// </summary>
         public void SetDirection(int aValue)
         {
             myDirection = aValue;
-
-            switch (myDirection)
-            {
-                case 1:
-                    myRotation = (MathHelper.Pi);
-                    break;
-                case 2:
-                    myRotation = -(MathHelper.Pi / 2);
-                    break;
-                case 3:
-                    myRotation = (MathHelper.Pi / 2);
-                    break;
-                case 4:
-                    myRotation = 0;
-                    break;
-                case 5:
-                    myRotation = (MathHelper.Pi);
-                    break;
-                case 6:
-                    myRotation = 0;
-                    break;
-                case 7:
-                    myRotation = -(MathHelper.Pi / 2);
-                    break;
-                case 8:
-                    myRotation = (MathHelper.Pi / 2);
-                    break;
-            }
         }
         public int Direction
         {
@@ -100,8 +66,11 @@ namespace Pacman
 
         public void Draw(SpriteBatch aSpriteBatch)
         {
-            aSpriteBatch.Draw(myTexture, myBoundingBox, 
-                mySourceRect, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+            if (myTexture != null)
+            {
+                aSpriteBatch.Draw(myTexture, myBoundingBox,
+                    null, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+            }
         }
 
         public void SetTexture()
@@ -112,10 +81,9 @@ namespace Pacman
                     myTexture = ResourceManager.RequestTexture("Empty");
                     break;
                 case '#':
-                    myTexture = ResourceManager.RequestTexture("Tileset");
+                    myTexture = ResourceManager.RequestTexture("Tile_Block-" + myDirection.ToString());
                     break;
             }
-            mySourceRect = new Rectangle(0, 0, myTexture.Width / 4, myTexture.Height / 4);
         }
     }
 }

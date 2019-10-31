@@ -48,8 +48,9 @@ namespace Pacman
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ResourceManager.AddTexture("Tileset", this.Content.Load<Texture2D>("Sprites/Tileset/tileset"));
-            ResourceManager.AddTexture("Tile_Corner", this.Content.Load<Texture2D>("Sprites/Tileset/tile_corner"));
-            ResourceManager.AddTexture("Tile_Wall", this.Content.Load<Texture2D>("Sprites/Tileset/tile_wall"));
+            ResourceManager.AddTexture("Tile_Block-1", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-1"));
+            ResourceManager.AddTexture("Tile_Block-2", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-2"));
+            ResourceManager.AddTexture("Tile_Block-3", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-3"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
 
             Level.SetTileTexture();

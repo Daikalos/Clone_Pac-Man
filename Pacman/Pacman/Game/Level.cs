@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -85,27 +86,48 @@ namespace Pacman
             {
                 for (int j = 0; j < myTiles.GetLength(1); j++)
                 {
-                    bool 
-                        tempLeftEmpty = false,
-                        tempRightEmpty = false,
-                        tempUpEmpty = false,
-                        tempDownEmpty = false;
+                    int[,] tempEmptyTiles = new int[3, 3];
 
-                    if (myTiles[i - 1, j].TileType == '.')
+                    for (int k = -1; k <= 1; k += 2)
                     {
-                        tempLeftEmpty = true;
+                        if (i + k > 0 && i + k < myTiles.GetLength(0))
+                        {
+                            if (myTiles[i + k, j]?.TileType == '.')
+                            {
+                                tempEmptyTiles[k + 1, 1] = 1;
+                            }
+                            else
+                            {
+                                tempEmptyTiles[k + 1, 1] = 2;
+                            }
+                        }
+                        if (j + k > 0 && j + k < myTiles.GetLength(1))
+                        {
+                            if (myTiles[i, j + k]?.TileType == '.')
+                            {
+                                tempEmptyTiles[1, k + 1] = 1;
+                            }
+                            else
+                            {
+                                tempEmptyTiles[1, k + 1] = 2;
+                            }
+                        }
                     }
-                    if (myTiles[i + 1, j].TileType == '.')
+
+                    if (myTiles[i, j].TileType == '#')
                     {
-                        tempRightEmpty = true;
-                    }
-                    if (myTiles[i, j - 1].TileType == '.')
-                    {
-                        tempUpEmpty = true;
-                    }
-                    if (myTiles[i, j + 1].TileType == '.')
-                    {
-                        tempDownEmpty = true;
+                        int tempAmount = 0;
+                        for (int k = 0; k < tempEmptyTiles.GetLength(0); k++)
+                        {
+                            for (int l = 0; l < tempEmptyTiles.GetLength(1); l++)
+                            {
+                                if (tempEmptyTiles[k, l] == 1)
+                                {
+                                    tempAmount++;
+                                }
+                            }
+                        }
+                        myTiles[i, j].SetDirection(tempAmount);
                     }
 
                     myTiles[i, j].SetTexture();

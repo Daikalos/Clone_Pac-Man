@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/Tileset.png</SourceFile>
-  <SourceTime>2019-10-31T17:13:54.6069463+01:00</SourceTime>
-  <DestFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/Tileset/Tileset.xnb</DestFile>
-  <DestTime>2019-10-31T18:03:07.0705056+01:00</DestTime>
+  <SourceFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-3.png</SourceFile>
+  <SourceTime>2019-10-31T17:16:14.62527+01:00</SourceTime>
+  <DestFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/Tileset/tile_block-3.xnb</DestFile>
+  <DestTime>2019-10-31T18:03:07.0672479+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
