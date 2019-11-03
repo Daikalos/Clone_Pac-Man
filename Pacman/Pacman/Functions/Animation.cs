@@ -8,9 +8,7 @@ namespace Pacman
         //Animation-Info
         int myCurrentFrame;
         Point myCurrentFramePos;
-        bool 
-            myIsFinished,
-            myAtLastFrame;
+        bool myIsFinished;
         float myTimer;
 
         //Texture-Info
@@ -28,7 +26,6 @@ namespace Pacman
         {
             this.myCurrentFrame = 0;
             this.myIsFinished = false;
-            this.myAtLastFrame = false;
 
             this.myFrameAmount = aFrameAmount;
             this.myAnimationSpeed = aAnimationSpeed;

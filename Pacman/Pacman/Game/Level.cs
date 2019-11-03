@@ -86,53 +86,54 @@ namespace Pacman
             {
                 for (int j = 0; j < myTiles.GetLength(1); j++)
                 {
-                    int[,] tempEmptyTiles = new int[3, 3];
-
+                    int 
+                        tempAmount = 0,
+                        tempDirection = 0;
+                    bool tempFlip = false;
                     for (int k = -1; k <= 1; k += 2)
                     {
-                        if (i + k > 0 && i + k < myTiles.GetLength(0))
+                        if (CheckIn(i + k, j))
                         {
-                            if (myTiles[i + k, j]?.TileType == '.')
+                            if (myTiles[i + k, j].TileType == '.' || myTiles[i + k, j].TileType == '-')
                             {
-                                tempEmptyTiles[k + 1, 1] = 1;
-                            }
-                            else
-                            {
-                                tempEmptyTiles[k + 1, 1] = 2;
+                                tempDirection = k;
+                                tempAmount++;
                             }
                         }
-                        if (j + k > 0 && j + k < myTiles.GetLength(1))
+                        if (CheckIn(i, j + k))
                         {
-                            if (myTiles[i, j + k]?.TileType == '.')
+                            if (myTiles[i, j + k].TileType == '.' || myTiles[i, j + k].TileType == '-')
                             {
-                                tempEmptyTiles[1, k + 1] = 1;
-                            }
-                            else
-                            {
-                                tempEmptyTiles[1, k + 1] = 2;
+                                if (k < 0)
+                                {
+                                    tempFlip = true;
+                                    tempDirection = k;
+                                }
+                                tempAmount++;
                             }
                         }
                     }
 
+                    myTiles[i, j].TileForm = tempAmount;
+                    myTiles[i, j].SetTexture();
                     if (myTiles[i, j].TileType == '#')
                     {
-                        int tempAmount = 0;
-                        for (int k = 0; k < tempEmptyTiles.GetLength(0); k++)
-                        {
-                            for (int l = 0; l < tempEmptyTiles.GetLength(1); l++)
-                            {
-                                if (tempEmptyTiles[k, l] == 1)
-                                {
-                                    tempAmount++;
-                                }
-                            }
-                        }
-                        myTiles[i, j].SetDirection(tempAmount);
+                        myTiles[i, j].SetRotation(tempDirection, tempFlip);
                     }
-
-                    myTiles[i, j].SetTexture();
                 }
             }
+        }
+
+        public static bool CheckIn(int anX, int anY)
+        {
+            if (anX >= 0 && anX < myTiles.GetLength(0))
+            {
+                if (anY >= 0 && anY < myTiles.GetLength(1))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

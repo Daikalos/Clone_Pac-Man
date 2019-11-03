@@ -53,3 +53,4 @@ C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.cspro
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.csproj.CopyComplete
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.exe
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.pdb
+C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-0.xnb

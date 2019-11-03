@@ -15,7 +15,7 @@ namespace Pacman
         Point mySize;
         char myTileType;
         float myRotation;
-        int myDirection;
+        int myTileForm;
 
         /// <summary>
         /// . = Empty;
@@ -26,16 +26,47 @@ namespace Pacman
             get => myTileType;
             set => myTileType = value;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        public void SetDirection(int aValue)
+        public void SetRotation(int aDirection, bool aFlip)
         {
-            myDirection = aValue;
+            switch(aFlip)
+            {
+                case true:
+                    if (aDirection == -1)
+                    {
+                        myRotation = MathHelper.Pi;
+                    }
+                    if (aDirection == 1)
+                    {
+                        myRotation = -(MathHelper.Pi / 2);
+                    }
+                    break;
+                case false:
+                    if (aDirection == -1)
+                    {
+                        myRotation = (MathHelper.Pi / 2);
+                    }
+                    if (aDirection == 1)
+                    {
+                        myRotation = 0;
+                        if (myTileForm == 1)
+                        {
+                            myRotation = MathHelper.Pi / 2;
+                        }
+                    }
+                    break;
+            }
+            myOrigin = new Vector2(myTexture.Width / 2, myTexture.Height / 2);
         }
-        public int Direction
+        /// <summary>
+        /// 0 = Block
+        /// 1 = Corridor
+        /// 2 = Corner
+        /// 3 = Dead-End
+        /// </summary>
+        public int TileForm
         {
-            get => myDirection;
+            set => myTileForm = value;
+            get => myTileForm;
         }
 
         public Rectangle BoundingBox
@@ -54,7 +85,7 @@ namespace Pacman
             this.myPosition = aPosition;
             this.mySize = aSize;
 
-            this.myDirection = 0;
+            this.myTileForm = 0;
             this.myOrigin = Vector2.Zero;
             this.myBoundingBox = new Rectangle((int)aPosition.X, (int)aPosition.Y, aSize.X, aSize.Y);
         }
@@ -77,11 +108,11 @@ namespace Pacman
         {
             switch (myTileType)
             {
-                case '.':
+                case '.': case '-':
                     myTexture = ResourceManager.RequestTexture("Empty");
                     break;
                 case '#':
-                    myTexture = ResourceManager.RequestTexture("Tile_Block-" + myDirection.ToString());
+                    myTexture = ResourceManager.RequestTexture("Tile_Block-" + myTileForm.ToString());
                     break;
             }
         }

@@ -5,12 +5,14 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/empty.png</File>
+    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-0.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-1.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-2.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-3.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/Tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
