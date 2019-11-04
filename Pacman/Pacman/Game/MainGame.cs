@@ -38,6 +38,8 @@ namespace Pacman
             ResourceManager.Initialize();
             Level.LoadLevel("../../../../Levels/Level01.txt");
 
+            myPlayer = new Player(new Vector2(Level.TileSize.X * 12, Window.ClientBounds.Height - Level.TileSize.Y * 2), new Point(32));
+
             myGameState = GameState.isPlaying;
 
             base.Initialize();
@@ -47,14 +49,19 @@ namespace Pacman
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ResourceManager.AddTexture("Tileset", this.Content.Load<Texture2D>("Sprites/Tileset/tileset"));
+            ResourceManager.AddFont("8-bit", this.Content.Load<SpriteFont>("Fonts/8bit")); 
+
             ResourceManager.AddTexture("Tile_Block-0", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-0"));
             ResourceManager.AddTexture("Tile_Block-1", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-1"));
             ResourceManager.AddTexture("Tile_Block-2", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-2"));
             ResourceManager.AddTexture("Tile_Block-3", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-3"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
 
+            ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
+
             Level.SetTileTexture();
+
+            myPlayer.SetTexture("Pacman_Walking");
         }
         protected override void UnloadContent()
         {
@@ -72,6 +79,7 @@ namespace Pacman
                     break;
                 case GameState.isPlaying:
                     Level.Update();
+                    myPlayer.Update(gameTime);
                     break;
                 case GameState.isPaused:
 
@@ -100,6 +108,7 @@ namespace Pacman
                     break;
                 case GameState.isPlaying:
                     Level.DrawTiles(spriteBatch);
+                    myPlayer.Draw(spriteBatch, gameTime);
                     break;
                 case GameState.isPaused:
 

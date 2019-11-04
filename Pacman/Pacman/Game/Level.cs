@@ -147,9 +147,27 @@ namespace Pacman
                             }
                         }
                     }
-                    if (tempTileForm == 4)
+                    if (tempTileForm == 0) //Fix tiles in corners of obstacles
                     {
-                        tempTileForm = 0;
+                        for (int k = -1; k <= 1; k += 2)
+                        {
+                            for (int l = -1; l <= 1; l += 2)
+                            {
+                                if (CheckIn(i + k, j + l))
+                                {
+                                    if (myTiles[i + k, j + l].TileType == '.')
+                                    {
+                                        tempTileForm = 2;
+                                        tempDirection = k;
+                                        if (l < 0)
+                                        {
+                                            tempFlip = true;
+                                        }
+                                        myTiles[i, j].Rotation += MathHelper.Pi;
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     myTiles[i, j].TileForm = tempTileForm;

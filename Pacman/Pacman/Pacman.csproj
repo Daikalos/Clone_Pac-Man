@@ -49,6 +49,7 @@
     <Compile Include="Functions\StringManager.cs" />
     <Compile Include="Game\Enemy.cs" />
     <Compile Include="Game\GameInfo.cs" />
+    <Compile Include="Game\GameObject.cs" />
     <Compile Include="Game\Level.cs" />
     <Compile Include="Game\MainGame.cs" />
     <Compile Include="Game\Player.cs" />

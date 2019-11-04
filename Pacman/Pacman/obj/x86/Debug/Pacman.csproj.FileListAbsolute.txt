@@ -54,3 +54,10 @@ C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.cspro
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.exe
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\obj\x86\Debug\Pacman.pdb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-0.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-0.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-1.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-2.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-3.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\pacman_walking.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Fonts\8bit.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Fonts\8bit16.ttf

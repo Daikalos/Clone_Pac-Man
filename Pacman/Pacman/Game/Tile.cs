@@ -9,9 +9,7 @@ namespace Pacman
         Vector2 
             myPosition,
             myOrigin;
-        Rectangle 
-            myBoundingBox,
-            mySourceRect;
+        Rectangle myBoundingBox;
         Point mySize;
         char myTileType;
         float myRotation;
@@ -33,21 +31,21 @@ namespace Pacman
                 case true:
                     if (aDirection == -1)
                     {
-                        myRotation = MathHelper.Pi;
+                        myRotation += MathHelper.Pi;
                     }
                     if (aDirection == 1)
                     {
-                        myRotation = -(MathHelper.Pi / 2);
+                        myRotation += -(MathHelper.Pi / 2);
                     }
                     break;
                 case false:
                     if (aDirection == -1)
                     {
-                        myRotation = (MathHelper.Pi / 2);
+                        myRotation += (MathHelper.Pi / 2);
                     }
                     if (aDirection == 1)
                     {
-                        myRotation = 0;
+                        myRotation += 0;
                     }
                     break;
             }
@@ -61,13 +59,18 @@ namespace Pacman
         /// </summary>
         public int TileForm
         {
-            set => myTileForm = value;
             get => myTileForm;
+            set => myTileForm = value;
+        }
+        public float Rotation
+        {
+            get => myRotation;
+            set => myRotation = value;
         }
 
-        public Rectangle BoundingBox
+        public Rectangle GetBoundingBox()
         {
-            get => myBoundingBox;
+            return new Rectangle(myBoundingBox.X - (int)myOrigin.X, myBoundingBox.Y - (int)myOrigin.Y, mySize.X, mySize.Y);
         }
 
         public Vector2 Position

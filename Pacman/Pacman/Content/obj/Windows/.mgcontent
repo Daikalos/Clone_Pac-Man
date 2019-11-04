@@ -5,7 +5,6 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont</File>
-    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</File>
     <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/empty.png</File>
     <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-0.png</File>
     <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-1.png</File>
@@ -15,7 +14,6 @@
   </SourceFiles>
   <DestFiles>
     <File>Fonts/8bit.spritefont</File>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
