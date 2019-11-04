@@ -48,20 +48,16 @@ namespace Pacman
                     if (aDirection == 1)
                     {
                         myRotation = 0;
-                        if (myTileForm == 1)
-                        {
-                            myRotation = MathHelper.Pi / 2;
-                        }
                     }
                     break;
             }
             myOrigin = new Vector2(myTexture.Width / 2, myTexture.Height / 2);
         }
         /// <summary>
-        /// 0 = Block
-        /// 1 = Corridor
-        /// 2 = Corner
-        /// 3 = Dead-End
+        /// 0 = Block;
+        /// 1 = Corridor;
+        /// 2 = Corner;
+        /// 3 = Dead-End;
         /// </summary>
         public int TileForm
         {

@@ -87,9 +87,13 @@ namespace Pacman
                 for (int j = 0; j < myTiles.GetLength(1); j++)
                 {
                     int 
-                        tempAmount = 0,
+                        tempTileForm = 0,
                         tempDirection = 0;
-                    bool tempFlip = false;
+                    bool 
+                        tempFlip = false,
+                        tempHorizontal = false,
+                        tempVertical = false;
+
                     for (int k = -1; k <= 1; k += 2)
                     {
                         if (CheckIn(i + k, j))
@@ -97,7 +101,8 @@ namespace Pacman
                             if (myTiles[i + k, j].TileType == '.' || myTiles[i + k, j].TileType == '-')
                             {
                                 tempDirection = k;
-                                tempAmount++;
+                                tempTileForm++;
+                                tempHorizontal = true;
                             }
                         }
                         if (CheckIn(i, j + k))
@@ -109,12 +114,45 @@ namespace Pacman
                                     tempFlip = true;
                                     tempDirection = k;
                                 }
-                                tempAmount++;
+                                tempTileForm++;
+                                tempVertical = true;
                             }
                         }
                     }
 
-                    myTiles[i, j].TileForm = tempAmount;
+                    if (tempHorizontal && !tempVertical || tempVertical && !tempHorizontal) //Fix corridor block type
+                    {
+                        tempTileForm = 1;
+                        if (tempHorizontal)
+                        {
+                            tempDirection = -1;
+                        }
+                    }
+                    if (tempTileForm == 3) //Fix rotation for situational tile direction on dead-end block types
+                    {
+                        if (CheckIn(i, j + 1))
+                        {
+                            if (myTiles[i, j + 1].TileType == '#')
+                            {
+                                tempFlip = true;
+                                tempDirection = -1;
+                            }
+                        }
+                        if (CheckIn(i + 1, j)) 
+                        {
+                            if (myTiles[i + 1, j].TileType == '#')
+                            {
+                                tempFlip = false;
+                                tempDirection = -1;
+                            }
+                        }
+                    }
+                    if (tempTileForm == 4)
+                    {
+                        tempTileForm = 0;
+                    }
+
+                    myTiles[i, j].TileForm = tempTileForm;
                     myTiles[i, j].SetTexture();
                     if (myTiles[i, j].TileType == '#')
                     {
