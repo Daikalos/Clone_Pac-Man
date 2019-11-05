@@ -26,16 +26,21 @@ namespace Pacman
         PlayerState myPlayerState;
         SpriteEffects myFlipSprite;
 
+        /// <summary>
+        /// 0 = Up;
+        /// 1 = Left;
+        /// 2 = Down;
+        /// 3 = Right;
+        /// </summary>
         int myAngle;
-        bool myCanSwitchAngle;
+        bool 
+            mySwitchAngle,
+            myIsMoving;
 
         public Player(Vector2 aPosition, Point aSize) : base(aPosition, aSize)
         {
             this.myPosition = Level.GetTileAtPos(aPosition).Position;
 
-            this.myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
-            this.myDirection = Vector2.Zero;
-            this.myDestination = myBoundingBox.Center.ToVector2();
             this.myWalkingAnimation = new Animation(new Point(4, 1), 0.1f, true);
             this.myPlayerState = PlayerState.isWalking;
         }
@@ -65,7 +70,14 @@ namespace Pacman
             switch(myPlayerState)
             {
                 case PlayerState.isWalking:
-                    myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myPosition, Vector2.Zero, new Point(32), mySize, Color.White, SpriteEffects.None);
+                    if (myIsMoving)
+                    {
+                        myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myPosition, Vector2.Zero, new Point(32), mySize, Color.White, SpriteEffects.None);
+                    }
+                    else
+                    {
+                        aSpriteBatch.Draw(myTexture, myPosition, new Rectangle(myTexture.Width / 4, 0, myTexture.Width / 4, myTexture.Height), Color.White);
+                    }
                     break;
                 case PlayerState.isEating:
 
@@ -78,32 +90,46 @@ namespace Pacman
 
         private void Movement(GameTime aGameTime)
         {
-            if (myCanSwitchAngle)
+            if (mySwitchAngle)
             {
-                if (KeyMouseReader.KeyHold(Keys.Up) && Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y - Level.TileSize.Y)).TileType != '#')
+                if (KeyMouseReader.KeyHold(Keys.Up) && !IsTileBlock(new Vector2(0, -Level.TileSize.Y)))
                 {
-                    myDestination = Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y - Level.TileSize.Y)).GetBoundingBox().Center.ToVector2();
+                    myAngle = 0;
                 }
-
-                if (KeyMouseReader.KeyHold(Keys.Left) && Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X - Level.TileSize.X, myBoundingBox.Center.Y)).TileType != '#')
+                if (KeyMouseReader.KeyHold(Keys.Left) && !IsTileBlock(new Vector2(-Level.TileSize.X, 0)))
                 {
-                    myDestination = Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X - Level.TileSize.X, myBoundingBox.Center.Y)).GetBoundingBox().Center.ToVector2();
+                    myAngle = 1;
                 }
-
-                if (KeyMouseReader.KeyHold(Keys.Down) && Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y + Level.TileSize.Y)).TileType != '#')
+                if (KeyMouseReader.KeyHold(Keys.Down) && !IsTileBlock(new Vector2(0, Level.TileSize.Y)))
                 {
-                    myDestination = Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y + Level.TileSize.Y)).GetBoundingBox().Center.ToVector2();
+                    myAngle = 2;
                 }
-
-                if (KeyMouseReader.KeyHold(Keys.Right) && Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + Level.TileSize.X, myBoundingBox.Center.Y)).TileType != '#')
+                if (KeyMouseReader.KeyHold(Keys.Right) && !IsTileBlock(new Vector2(Level.TileSize.X, 0)))
                 {
-                    myDestination = Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + Level.TileSize.X, myBoundingBox.Center.Y)).GetBoundingBox().Center.ToVector2();
+                    myAngle = 3;
                 }
             }
 
+            switch (myAngle)
+            {
+                case 0:
+                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y - Level.TileSize.Y)).GetCenter());
+                    break;
+                case 1:
+                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X - Level.TileSize.X, myBoundingBox.Center.Y)).GetCenter());
+                    break;
+                case 2:
+                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y + Level.TileSize.Y)).GetCenter());
+                    break;
+                case 3:
+                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + Level.TileSize.X, myBoundingBox.Center.Y)).GetCenter());
+                    break;
+            }
+
+
             if (Vector2.Distance(myDestination, myBoundingBox.Center.ToVector2()) > 1.0f)
             {
-                myCanSwitchAngle = false;
+                myIsMoving = true;
 
                 myDirection = myDestination - myBoundingBox.Center.ToVector2();
                 myDirection.Normalize();
@@ -112,8 +138,32 @@ namespace Pacman
             }
             else
             {
-                myCanSwitchAngle = true;
+                myIsMoving = false;
             }
+
+            if (Vector2.Distance(Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).GetCenter(), myBoundingBox.Center.ToVector2()) > 1.0f)
+            {
+                mySwitchAngle = false;
+            }
+            else
+            {
+                mySwitchAngle = true;
+            }
+        }
+        public void MoveTo(Vector2 aPosition)
+        {
+            if (Level.GetTileAtPos(aPosition).TileType != '#')
+            {
+                myDestination = Level.GetTileAtPos(aPosition).GetCenter();
+            }
+        }
+        public bool IsTileBlock(Vector2 aPosition)
+        {
+            if (Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y)).TileType == '#')
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -68,9 +68,9 @@ namespace Pacman
             set => myRotation = value;
         }
 
-        public Rectangle GetBoundingBox()
+        public Vector2 GetCenter()
         {
-            return new Rectangle(myBoundingBox.X - (int)myOrigin.X, myBoundingBox.Y - (int)myOrigin.Y, mySize.X, mySize.Y);
+            return new Rectangle(myBoundingBox.X - (int)myOrigin.X, myBoundingBox.Y - (int)myOrigin.Y, mySize.X, mySize.Y).Center.ToVector2();
         }
 
         public Vector2 Position

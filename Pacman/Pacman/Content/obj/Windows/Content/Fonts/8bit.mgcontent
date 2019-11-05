@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont</SourceFile>
-  <SourceTime>2019-11-04T13:47:31.6065318+01:00</SourceTime>
-  <DestFile>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Fonts/8bit.xnb</DestFile>
-  <DestTime>2019-11-04T14:23:04.014137+01:00</DestTime>
+  <SourceFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont</SourceFile>
+  <SourceTime>2019-11-04T23:45:41.0964867+01:00</SourceTime>
+  <DestFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Fonts/8bit.xnb</DestFile>
+  <DestTime>2019-11-05T13:30:38.1085664+01:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
