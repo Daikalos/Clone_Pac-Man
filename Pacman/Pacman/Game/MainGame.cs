@@ -35,6 +35,7 @@ namespace Pacman
             graphics.PreferredBackBufferHeight = 992;
             graphics.ApplyChanges();
 
+            GameInfo.Initialize(0.5f);
             ResourceManager.Initialize();
             Level.LoadLevel("../../../../Levels/Level01.txt");
 

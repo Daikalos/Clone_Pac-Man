@@ -128,7 +128,7 @@ namespace Pacman
                             tempDirection = -1;
                         }
                     }
-                    if (tempTileForm == 3) //Fix rotation for situational tile direction on dead-end block types
+                    if (tempTileForm == 3) //Fix rotation for situational tile direction on 3-sided block types
                     {
                         if (CheckIn(i, j + 1))
                         {

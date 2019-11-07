@@ -22,9 +22,9 @@ namespace Pacman
 
         Vector2 
             myDestination,
-            myDirection;
-        PlayerState myPlayerState;
-        SpriteEffects myFlipSprite;
+            myDirection,
+            myOrigin;
+        PlayerState myPlayerState:
 
         /// <summary>
         /// 0 = Up;
@@ -39,8 +39,6 @@ namespace Pacman
 
         public Player(Vector2 aPosition, Point aSize) : base(aPosition, aSize)
         {
-            this.myPosition = Level.GetTileAtPos(aPosition).Position;
-
             this.myWalkingAnimation = new Animation(new Point(4, 1), 0.1f, true);
             this.myPlayerState = PlayerState.isWalking;
         }
@@ -94,18 +92,34 @@ namespace Pacman
             {
                 if (KeyMouseReader.KeyHold(Keys.Up) && !IsTileBlock(new Vector2(0, -Level.TileSize.Y)))
                 {
+                    if (myAngle == 2)
+                    {
+                        mySwitchAngle = true;
+                    }
                     myAngle = 0;
                 }
                 if (KeyMouseReader.KeyHold(Keys.Left) && !IsTileBlock(new Vector2(-Level.TileSize.X, 0)))
                 {
+                    if (myAngle == 3)
+                    {
+                        mySwitchAngle = true;
+                    }
                     myAngle = 1;
                 }
                 if (KeyMouseReader.KeyHold(Keys.Down) && !IsTileBlock(new Vector2(0, Level.TileSize.Y)))
                 {
+                    if (myAngle == 0)
+                    {
+                        mySwitchAngle = true;
+                    }
                     myAngle = 2;
                 }
                 if (KeyMouseReader.KeyHold(Keys.Right) && !IsTileBlock(new Vector2(Level.TileSize.X, 0)))
                 {
+                    if (myAngle == 1)
+                    {
+                        mySwitchAngle = true;
+                    }
                     myAngle = 3;
                 }
             }
@@ -148,6 +162,38 @@ namespace Pacman
             else
             {
                 mySwitchAngle = true;
+            }
+
+            if (!mySwitchAngle) //Provide better movement control
+            {
+                if (KeyMouseReader.KeyHold(Keys.Up))
+                {
+                    if (myAngle == 2)
+                    {
+                        mySwitchAngle = true;
+                    }
+                }
+                if (KeyMouseReader.KeyHold(Keys.Left))
+                {
+                    if (myAngle == 3)
+                    {
+                        mySwitchAngle = true;
+                    }
+                }
+                if (KeyMouseReader.KeyHold(Keys.Down))
+                {
+                    if (myAngle == 0)
+                    {
+                        mySwitchAngle = true;
+                    }
+                }
+                if (KeyMouseReader.KeyHold(Keys.Right))
+                {
+                    if (myAngle == 1)
+                    {
+                        mySwitchAngle = true;
+                    }
+                }
             }
         }
         public void MoveTo(Vector2 aPosition)

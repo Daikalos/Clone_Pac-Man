@@ -10,16 +10,12 @@ namespace Pacman
     {
         private static Vector2 myDrawPos;
         private static int[] myHighScores;
-        private static int 
+        private static int
             myScore,
-            myDrawScore,
-            myBonusScore,
-            myReduceBonusAmount;
-        private static float 
+            myDrawScore;
+        private static float
             myDSTimer,
-            myDSTimerMax,
-            myReduceBonus,
-            myReduceBonusMax; //Draw Score
+            myDSTimerMax;
 
         public static Vector2 DrawPos
         {
@@ -33,25 +29,17 @@ namespace Pacman
         {
             get => myScore;
         }
-        public static int BonusScore
-        {
-            get => myBonusScore;
-        }
         public static int HighScore
         {
             get => myHighScores.Max();
         }
 
-        public static void Initialize(float aDSTimerMax, float aReduceBonusDelay, int aReduceBonusAmount, int aBonusScore)
+        public static void Initialize(float aDSTimerMax)
         {
-            myDSTimerMax = aDSTimerMax;
-            myReduceBonusMax = aReduceBonusDelay;
-            myReduceBonusAmount = aReduceBonusAmount;
-            myBonusScore = aBonusScore;
-
             myDrawPos = Vector2.Zero;
             myScore = 0;
             myDSTimer = 0;
+            myDSTimerMax = aDSTimerMax;
         }
 
         public static void LoadHighScore(string aPath)
@@ -63,18 +51,11 @@ namespace Pacman
         }
         public static void SaveHighScore(string aPath)
         {
-            File.AppendAllText(aPath, Environment.NewLine + "Highscore=" + (myScore + myBonusScore).ToString());
+            File.AppendAllText(aPath, Environment.NewLine + "Highscore=" + myScore.ToString());
         }
 
         public static void Update(GameTime aGameTime)
         {
-            myReduceBonus += (float)aGameTime.ElapsedGameTime.TotalSeconds;
-            if (myReduceBonus >= myReduceBonusMax)
-            {
-                myBonusScore -= (int)myReduceBonusAmount;
-                myReduceBonus = 0;
-            }
-
             if (myDSTimer >= 0)
             {
                 myDSTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
@@ -91,7 +72,7 @@ namespace Pacman
 
         public static void AddScore(Vector2 aPos, int someScore)
         {
-            myDrawPos = new Vector2(aPos.X, aPos.Y - 40);
+            myDrawPos = new Vector2(aPos.X, aPos.Y - Level.TileSize.Y);
             myScore += someScore;
             myDrawScore = someScore;
             myDSTimer = myDSTimerMax;

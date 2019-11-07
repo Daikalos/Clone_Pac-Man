@@ -45,6 +45,7 @@
     <Compile Include="Functions\CollisionManager.cs" />
     <Compile Include="Functions\FileReader.cs" />
     <Compile Include="Functions\KeyMouseReader.cs" />
+    <Compile Include="Functions\StaticRandom.cs" />
     <Compile Include="Functions\ResourceManager.cs" />
     <Compile Include="Functions\StringManager.cs" />
     <Compile Include="Game\Enemy.cs" />

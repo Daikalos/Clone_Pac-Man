@@ -3,14 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    class Tile
+    class Tile : GameObject
     {
-        Texture2D myTexture;
-        Vector2 
-            myPosition,
-            myOrigin;
-        Rectangle myBoundingBox;
-        Point mySize;
+        Vector2 myOrigin;
         char myTileType;
         float myRotation;
         int myTileForm;
@@ -55,7 +50,7 @@ namespace Pacman
         /// 0 = Block;
         /// 1 = Corridor;
         /// 2 = Corner;
-        /// 3 = Dead-End;
+        /// 3 = 3-sided;
         /// </summary>
         public int TileForm
         {
@@ -79,11 +74,8 @@ namespace Pacman
             set => myPosition = value;
         }
 
-        public Tile(Vector2 aPosition, Point aSize)
+        public Tile(Vector2 aPosition, Point aSize) : base(aPosition, aSize)
         {
-            this.myPosition = aPosition;
-            this.mySize = aSize;
-
             this.myTileForm = 0;
             this.myOrigin = Vector2.Zero;
             this.myBoundingBox = new Rectangle((int)aPosition.X, (int)aPosition.Y, aSize.X, aSize.Y);

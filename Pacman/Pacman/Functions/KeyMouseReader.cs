@@ -18,6 +18,11 @@ namespace Pacman
         {
             return myCurrentKeyState.IsKeyDown(aKey);
         }
+        public static KeyboardState GetPreviousState
+        {
+            get => myPreviousKeyState;
+        }
+
 
         public static bool LeftClick()
         {

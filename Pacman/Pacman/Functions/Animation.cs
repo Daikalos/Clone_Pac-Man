@@ -3,25 +3,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    class Animation
+    internal class Animation
     {
         //Animation-Info
-        int myCurrentFrame;
-        Point myCurrentFramePos;
-        bool myIsFinished;
-        float myTimer;
+        private int myCurrentFrame;
+
+        private Point myCurrentFramePos;
+        private bool myIsFinished;
+        private float myTimer;
 
         //Texture-Info
-        Point
+        private Point
             myFrameAmount;
-        float myAnimationSpeed;
-        bool myIsLoop;
+
+        private float myAnimationSpeed;
+        private bool myIsLoop;
 
         public bool IsFinished
         {
             get => myIsFinished;
             set => myIsFinished = value;
         }
+
         public Animation(Point aFrameAmount, float aAnimationSpeed, bool aIsLoop)
         {
             this.myCurrentFrame = 0;

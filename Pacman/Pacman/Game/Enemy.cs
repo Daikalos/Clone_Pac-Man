@@ -10,9 +10,15 @@ namespace Pacman
 {
     class Enemy : GameObject
     {
+        enum BehaviourAI
+        {
+            isChasing,
+            isRandom,
+        }
+
         public Enemy(Vector2 aPosition, Point aSize) : base(aPosition, aSize)
         {
-            myPosition = Level.GetTileAtPos(aPosition).Position;
+
         }
     }
 }
