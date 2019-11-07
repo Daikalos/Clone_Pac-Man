@@ -6,8 +6,9 @@ namespace Pacman
     class GameObject
     {
         protected Texture2D myTexture;
-
-        protected Vector2 myPosition;
+        protected Vector2 
+            myPosition,
+            myOrigin;
         protected Rectangle myBoundingBox;
         protected Point mySize;
 
@@ -15,11 +16,18 @@ namespace Pacman
         {
             this.myPosition = aPosition;
             this.mySize = aSize;
+
+            this.myOrigin = Vector2.Zero;
         }
 
-        public void SetTexture(string aName)
+        public virtual void SetTexture(string aName) //Override if needed
         {
             myTexture = ResourceManager.RequestTexture(aName);
+        }
+
+        public void SetOrigin(Point aFrameSize)
+        {
+            myOrigin = new Vector2(myTexture.Width / 2 / aFrameSize.X, myTexture.Height / 2 / aFrameSize.Y);
         }
     }
 }

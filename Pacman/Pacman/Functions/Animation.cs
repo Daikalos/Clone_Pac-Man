@@ -35,7 +35,7 @@ namespace Pacman
             this.myIsLoop = aIsLoop;
         }
 
-        public void DrawSpriteSheet(SpriteBatch aSpriteBatch, GameTime aGameTime, Texture2D aTexture, Vector2 aPos, Vector2 aOrigin, Point aFrameSize, Point aDestSize, Color aColor, SpriteEffects aSpriteEffect)
+        public void DrawSpriteSheet(SpriteBatch aSpriteBatch, GameTime aGameTime, Texture2D aTexture, Vector2 aPos, Vector2 aOrigin, Point aFrameSize, Point aDestSize, Color aColor, float aRotation)
         {
             if (myIsFinished) return;
 
@@ -68,7 +68,7 @@ namespace Pacman
             aSpriteBatch.Draw(aTexture,
                 new Rectangle((int)aPos.X, (int)aPos.Y, aDestSize.X, aDestSize.Y),
                 new Rectangle(aFrameSize.X * myCurrentFramePos.X, aFrameSize.Y * myCurrentFramePos.Y, aFrameSize.X, aFrameSize.Y),
-                aColor, 0.0f, aOrigin, aSpriteEffect, 0.0f);
+                aColor, aRotation, aOrigin, SpriteEffects.None, 0.0f);
         }
     }
 }

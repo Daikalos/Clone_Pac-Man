@@ -19,6 +19,7 @@ namespace Pacman
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        SpriteFont my8bitFont;
         Player myPlayer;
 
         GameState myGameState;
@@ -35,11 +36,15 @@ namespace Pacman
             graphics.PreferredBackBufferHeight = 992;
             graphics.ApplyChanges();
 
-            GameInfo.Initialize(0.5f);
             ResourceManager.Initialize();
+
             Level.LoadLevel("../../../../Levels/Level01.txt");
 
-            myPlayer = new Player(new Vector2(Level.TileSize.X * 12, Window.ClientBounds.Height - Level.TileSize.Y * 2), new Point(32));
+            EnemyManager.Initialize();
+            GameInfo.Initialize(Window, 0.5f);
+
+            EnemyManager.AddEnemy();
+            myPlayer = new Player(new Vector2(Level.TileSize.X * 12, Window.ClientBounds.Height - Level.TileSize.Y * 2), new Point(32), 140.0f);
 
             myGameState = GameState.isPlaying;
 
@@ -56,13 +61,19 @@ namespace Pacman
             ResourceManager.AddTexture("Tile_Block-1", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-1"));
             ResourceManager.AddTexture("Tile_Block-2", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-2"));
             ResourceManager.AddTexture("Tile_Block-3", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-3"));
+            ResourceManager.AddTexture("Snack", this.Content.Load<Texture2D>("Sprites/Tileset/snack"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
-
+            ResourceManager.AddTexture("Black_Rect", this.Content.Load<Texture2D>("Sprites/blackRect"));
             ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
+            ResourceManager.AddTexture("Ghost", this.Content.Load<Texture2D>("Sprites/ghost"));
 
             Level.SetTileTexture();
-
+            EnemyManager.SetTexture();
+            GameInfo.SetRectTexture("Black_Rect");
             myPlayer.SetTexture("Pacman_Walking");
+
+            my8bitFont = ResourceManager.RequestFont("8-bit");
+
         }
         protected override void UnloadContent()
         {
@@ -80,7 +91,9 @@ namespace Pacman
                     break;
                 case GameState.isPlaying:
                     Level.Update();
+                    EnemyManager.Update(gameTime);
                     myPlayer.Update(gameTime);
+                    GameInfo.Update(gameTime);
                     break;
                 case GameState.isPaused:
 
@@ -109,7 +122,9 @@ namespace Pacman
                     break;
                 case GameState.isPlaying:
                     Level.DrawTiles(spriteBatch);
+                    EnemyManager.Draw(spriteBatch, gameTime);
                     myPlayer.Draw(spriteBatch, gameTime);
+                    GameInfo.Draw(spriteBatch, Window, my8bitFont);
                     break;
                 case GameState.isPaused:
 

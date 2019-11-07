@@ -8,6 +8,7 @@ namespace Pacman
 {
     static class GameInfo
     {
+        private static Texture2D myRect; //Blacks out right side of screen
         private static Vector2 myDrawPos;
         private static int[] myHighScores;
         private static int
@@ -34,12 +35,13 @@ namespace Pacman
             get => myHighScores.Max();
         }
 
-        public static void Initialize(float aDSTimerMax)
+        public static void Initialize(GameWindow aWindow, float aDSTimerMax)
         {
+            myDSTimerMax = aDSTimerMax;
+
             myDrawPos = Vector2.Zero;
             myScore = 0;
             myDSTimer = 0;
-            myDSTimerMax = aDSTimerMax;
         }
 
         public static void LoadHighScore(string aPath)
@@ -62,8 +64,9 @@ namespace Pacman
             }
         }
 
-        public static void Draw(SpriteBatch aSpriteBatch, SpriteFont aFont)
+        public static void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, SpriteFont aFont)
         {
+            aSpriteBatch.Draw(myRect, new Rectangle(Level.MapSize.X, 0, aWindow.ClientBounds.Width - Level.MapSize.X, aWindow.ClientBounds.Height), null, Color.Black);
             if (myDSTimer >= 0)
             {
                 StringManager.DrawStringMid(aSpriteBatch, aFont, myDrawScore.ToString(), myDrawPos, Color.White, 0.5f);
@@ -76,6 +79,11 @@ namespace Pacman
             myScore += someScore;
             myDrawScore = someScore;
             myDSTimer = myDSTimerMax;
+        }
+
+        public static void SetRectTexture(string aName)
+        {
+            myRect = ResourceManager.RequestTexture(aName);
         }
     }
 }

@@ -5,13 +5,14 @@ namespace Pacman
 {
     class Tile : GameObject
     {
-        Vector2 myOrigin;
         char myTileType;
         float myRotation;
         int myTileForm;
 
         /// <summary>
-        /// . = Empty;
+        /// - = Empty;
+        /// . = Score/Empty;
+        /// & = Spawn;
         /// # = Block;
         /// </summary>
         public char TileType
@@ -99,11 +100,14 @@ namespace Pacman
         {
             switch (myTileType)
             {
-                case '.': case '-':
+                case '-': case '&':
                     myTexture = ResourceManager.RequestTexture("Empty");
                     break;
                 case '#':
                     myTexture = ResourceManager.RequestTexture("Tile_Block-" + myTileForm.ToString());
+                    break;
+                case '.':
+                    myTexture = ResourceManager.RequestTexture("Snack");
                     break;
             }
         }

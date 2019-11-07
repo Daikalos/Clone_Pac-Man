@@ -11,11 +11,22 @@ namespace Pacman
     {
         private static string[] myLevelBuilder;
         private static Tile[,] myTiles;
-        private static Point myTileSize;
+        private static Point 
+            myTileSize,
+            myMapSize;
 
         public static Point TileSize
         {
             get => myTileSize;
+        }
+        public static Point MapSize
+        {
+            get => myMapSize;
+        }
+
+        public static Tile[,] GetTiles
+        {
+            get => myTiles;
         }
 
         public static Tile GetTileAtPos(Vector2 aPos)
@@ -28,6 +39,17 @@ namespace Pacman
                 }
             }
             return myTiles[0, 0];
+        }
+        public static bool IsTileOutside(Vector2 aPos)
+        {
+            if (((int)aPos.X / myTileSize.X) >= 0 && ((int)aPos.Y / myTileSize.Y) >= 0)
+            {
+                if (((int)aPos.X / myTileSize.X) < myTiles.GetLength(0) && ((int)aPos.Y / myTileSize.Y) < myTiles.GetLength(1))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static void Initialize()
@@ -55,7 +77,9 @@ namespace Pacman
                 }
             }
 
-
+            myMapSize = new Point(
+                myTiles.GetLength(0) * myTileSize.X, 
+                myTiles.GetLength(1) * myTileSize.Y);
         }
 
         public static void Update()
