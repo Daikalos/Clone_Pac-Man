@@ -120,16 +120,16 @@ namespace Pacman
             switch (myAngle)
             {
                 case 0:
-                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y - Level.TileSize.Y)).GetCenter());
+                    MoveTo(new Vector2(0, -Level.TileSize.Y));
                     break;
                 case 1:
-                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X - Level.TileSize.X, myBoundingBox.Center.Y)).GetCenter());
+                    MoveTo(new Vector2(-Level.TileSize.X, 0));
                     break;
                 case 2:
-                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X, myBoundingBox.Center.Y + Level.TileSize.Y)).GetCenter());
+                    MoveTo(new Vector2(0, Level.TileSize.Y));
                     break;
                 case 3:
-                    MoveTo(Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + Level.TileSize.X, myBoundingBox.Center.Y)).GetCenter());
+                    MoveTo(new Vector2(Level.TileSize.X, 0));
                     break;
             }
 
@@ -148,7 +148,7 @@ namespace Pacman
                 myIsMoving = false;
             }
 
-            if (Vector2.Distance(Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).GetCenter(), myBoundingBox.Center.ToVector2()) > 1.0f)
+            if (Vector2.Distance(Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1.GetCenter(), myBoundingBox.Center.ToVector2()) > 1.0f)
             {
                 mySwitchAngle = false;
                 if (KeyMouseReader.KeyHold(Keys.Up))
@@ -187,12 +187,15 @@ namespace Pacman
         }
         private void MoveTo(Vector2 aPosition)
         {
-            if (Level.GetTileAtPos(aPosition).TileType != '#')
+            Vector2 tempDirection = new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y);
+            if (Level.GetTileAtPos(tempDirection).Item2)
             {
-                myDestination = Level.GetTileAtPos(aPosition).GetCenter();
+                if (Level.GetTileAtPos(tempDirection).Item1.TileType != '#')
+                {
+                    myDestination = Level.GetTileAtPos(tempDirection).Item1.GetCenter();
+                }
             }
-
-            if (Level.IsTileOutside(myDestination)) //If headed outside map
+            else //If headed outside map
             {
                 switch (myAngle)
                 {
@@ -221,10 +224,18 @@ namespace Pacman
             {
                 myPosition.X = Level.MapSize.X;
             }
+            if (myPosition.Y > Level.MapSize.Y)
+            {
+                myPosition.Y = -mySize.Y;
+            }
+            if (myPosition.Y < -mySize.Y)
+            {
+                myPosition.Y = Level.MapSize.Y;
+            }
         }
         private bool IsTileBlock(Vector2 aPosition)
         {
-            if (Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y)).TileType == '#')
+            if (Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y)).Item1.TileType == '#')
             {
                 return true;
             }
@@ -237,7 +248,7 @@ namespace Pacman
         }
         private void CollisionSnack()
         {
-            Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2());
+            Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1;
             if (tempTile.TileType == '.')
             {
                 GameInfo.AddScore(myBoundingBox.Center.ToVector2(), 100);

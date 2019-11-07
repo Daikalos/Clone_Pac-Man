@@ -29,33 +29,21 @@ namespace Pacman
             get => myTiles;
         }
 
-        public static Tile GetTileAtPos(Vector2 aPos)
+        public static Tuple<Tile, bool> GetTileAtPos(Vector2 aPos)
         {
-            if (((int)aPos.X / myTileSize.X) >= 0 && ((int)aPos.Y / myTileSize.Y) >= 0)
+            if (aPos.X > 0 && aPos.Y > 0)
             {
-                if (((int)aPos.X / myTileSize.X) < myTiles.GetLength(0) && ((int)aPos.Y / myTileSize.Y) < myTiles.GetLength(1))
+                if (((int)aPos.X / myTileSize.X) >= 0 && ((int)aPos.Y / myTileSize.Y) >= 0)
                 {
-                    return myTiles[(int)aPos.X / myTileSize.X, (int)aPos.Y / myTileSize.Y];
+                    if (((int)aPos.X / myTileSize.X) < myTiles.GetLength(0) && ((int)aPos.Y / myTileSize.Y) < myTiles.GetLength(1))
+                    {
+                        return new Tuple<Tile, bool>(myTiles[(int)aPos.X / myTileSize.X, (int)aPos.Y / myTileSize.Y], true);
+                    }
                 }
             }
-            return myTiles[0, 0];
-        }
-        public static bool IsTileOutside(Vector2 aPos)
-        {
-            if (((int)aPos.X / myTileSize.X) >= 0 && ((int)aPos.Y / myTileSize.Y) >= 0)
-            {
-                if (((int)aPos.X / myTileSize.X) < myTiles.GetLength(0) && ((int)aPos.Y / myTileSize.Y) < myTiles.GetLength(1))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return new Tuple<Tile, bool>(myTiles[0, 0], false);
         }
 
-        public static void Initialize()
-        {
-
-        }
         public static void LoadLevel(string aFilePath)
         {
             myLevelBuilder = File.ReadAllLines(aFilePath);

@@ -26,7 +26,6 @@ C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Conte
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_corner.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_wall.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\empty.xnb
-C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\Tileset.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-1.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-2.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_block-3.xnb
@@ -66,3 +65,6 @@ C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Cont
 C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\snack.xnb
 C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\blackRect.xnb
 C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost.xnb
+C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\snack.xnb
+C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\blackRect.xnb
+C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost.xnb
