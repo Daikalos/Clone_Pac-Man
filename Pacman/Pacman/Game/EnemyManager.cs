@@ -51,7 +51,7 @@ namespace Pacman
                 {
                     if (Level.GetTiles[x, y].TileType == '&')
                     {
-                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, new Point(32), tempAIType));
+                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, tempAIType));
                         tempAIType++;
                     }
                 }

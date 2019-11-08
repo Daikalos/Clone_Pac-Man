@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    internal class Animation
+    internal class AnimationManager
     {
         //Animation-Info
         private int myCurrentFrame;
@@ -25,7 +25,7 @@ namespace Pacman
             set => myIsFinished = value;
         }
 
-        public Animation(Point aFrameAmount, float aAnimationSpeed, bool aIsLoop)
+        public AnimationManager(Point aFrameAmount, float aAnimationSpeed, bool aIsLoop)
         {
             this.myCurrentFrame = 0;
             this.myIsFinished = false;

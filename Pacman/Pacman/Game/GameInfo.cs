@@ -68,12 +68,12 @@ namespace Pacman
         {
             aSpriteBatch.Draw(myRect, new Rectangle(Level.MapSize.X, 0, aWindow.ClientBounds.Width - Level.MapSize.X, aWindow.ClientBounds.Height), null, Color.Black);
 
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 16), Color.Yellow, 1.0f);
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 48), Color.Yellow, 0.9f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 16), Color.Yellow, 0.7f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 48), Color.Yellow, 0.6f);
 
             if (myDSTimer >= 0)
             {
-                StringManager.DrawStringMid(aSpriteBatch, aFont, myDrawScore.ToString(), myDrawPos, Color.White, 0.5f);
+                StringManager.DrawStringMid(aSpriteBatch, aFont, myDrawScore.ToString(), myDrawPos, Color.White, 0.3f);
             }
         }
 

@@ -20,6 +20,11 @@ namespace Pacman
             this.myOrigin = Vector2.Zero;
         }
 
+        public virtual void Draw(SpriteBatch aSpriteBatch)
+        {
+            aSpriteBatch.Draw(myTexture, myPosition, null, Color.White);
+        }
+
         public virtual void SetTexture(string aName) //Override if needed
         {
             myTexture = ResourceManager.RequestTexture(aName);

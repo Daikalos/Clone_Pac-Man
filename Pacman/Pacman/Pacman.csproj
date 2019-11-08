@@ -41,7 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Functions\Animation.cs" />
+    <Compile Include="Functions\AnimationManager.cs" />
     <Compile Include="Functions\CollisionManager.cs" />
     <Compile Include="Functions\FileReader.cs" />
     <Compile Include="Functions\KeyMouseReader.cs" />
@@ -58,6 +58,13 @@
     <Compile Include="Game\Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States\DeadState.cs" />
+    <Compile Include="States\EditorState.cs" />
+    <Compile Include="States\HighScoreState.cs" />
+    <Compile Include="States\MenuState.cs" />
+    <Compile Include="States\PlayState.cs" />
+    <Compile Include="States\State.cs" />
+    <Compile Include="States\WinState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

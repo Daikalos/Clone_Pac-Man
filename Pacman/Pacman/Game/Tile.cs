@@ -87,7 +87,7 @@ namespace Pacman
             myBoundingBox = new Rectangle((int)myPosition.X + (int)myOrigin.X, (int)myPosition.Y + (int)myOrigin.Y, mySize.X, mySize.Y);
         }
 
-        public void Draw(SpriteBatch aSpriteBatch)
+        public override void Draw(SpriteBatch aSpriteBatch)
         {
             if (myTexture != null)
             {

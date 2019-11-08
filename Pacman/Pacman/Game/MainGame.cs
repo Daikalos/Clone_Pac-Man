@@ -7,22 +7,17 @@ namespace Pacman
 {
     public class MainGame : Game
     {
-        enum GameState
-        {
-            isOnMenu,
-            isPlaying,
-            isPaused,
-            isDead,
-            isWon
-        }
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        SpriteFont my8bitFont;
-        Player myPlayer;
+        State myGameState;
 
-        GameState myGameState;
+        public void ChangeState(State aNewState)
+        {
+            myGameState = aNewState;
+            myGameState.LoadContent();
+        }
 
         public MainGame()
         {
@@ -38,15 +33,9 @@ namespace Pacman
 
             ResourceManager.Initialize();
 
-            Level.LoadLevel("../../../../Levels/Level01.txt");
-
-            EnemyManager.Initialize();
             GameInfo.Initialize(Window, 0.5f);
 
-            EnemyManager.AddEnemy();
-            myPlayer = new Player(new Vector2(Level.TileSize.X * 12, Window.ClientBounds.Height - Level.TileSize.Y * 2), new Point(32), 140.0f);
-
-            myGameState = GameState.isPlaying;
+            ChangeState(new MenuState(this));
 
             base.Initialize();
         }
@@ -67,13 +56,9 @@ namespace Pacman
             ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
             ResourceManager.AddTexture("Ghost", this.Content.Load<Texture2D>("Sprites/ghost"));
 
-            Level.SetTileTexture();
-            EnemyManager.SetTexture();
             GameInfo.SetRectTexture("Black_Rect");
-            myPlayer.SetTexture("Pacman_Walking");
 
-            my8bitFont = ResourceManager.RequestFont("8-bit");
-
+            myGameState.LoadContent();
         }
         protected override void UnloadContent()
         {
@@ -83,28 +68,8 @@ namespace Pacman
         protected override void Update(GameTime gameTime)
         {
             KeyMouseReader.Update();
-            
-            switch (myGameState)
-            {
-                case GameState.isOnMenu:
 
-                    break;
-                case GameState.isPlaying:
-                    Level.Update();
-                    EnemyManager.Update(gameTime);
-                    myPlayer.Update(gameTime);
-                    GameInfo.Update(gameTime);
-                    break;
-                case GameState.isPaused:
-
-                    break;
-                case GameState.isDead:
-
-                    break;
-                case GameState.isWon:
-
-                    break;
-            }
+            myGameState.Update(Window, gameTime);
 
             base.Update(gameTime);
         }
@@ -115,27 +80,7 @@ namespace Pacman
 
             spriteBatch.Begin();
 
-            switch (myGameState)
-            {
-                case GameState.isOnMenu:
-
-                    break;
-                case GameState.isPlaying:
-                    Level.DrawTiles(spriteBatch);
-                    EnemyManager.Draw(spriteBatch, gameTime);
-                    myPlayer.Draw(spriteBatch, gameTime);
-                    GameInfo.Draw(spriteBatch, Window, my8bitFont);
-                    break;
-                case GameState.isPaused:
-
-                    break;
-                case GameState.isDead:
-
-                    break;
-                case GameState.isWon:
-
-                    break;
-            }
+            myGameState.Draw(spriteBatch, Window, gameTime);
 
             spriteBatch.End();
 

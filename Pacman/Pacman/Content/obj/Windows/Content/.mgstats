@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont","C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Fonts/8bit.xnb","FontDescriptionProcessor","SpriteFontContent",2069,70673,0.3922365
+"C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont","C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Fonts/8bit.xnb","FontDescriptionProcessor","SpriteFontContent",2069,136209,0.4320119
 "C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/blackRect.png","C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/blackRect.xnb","TextureProcessor","Texture2DContent",925,65621,0.0588714
 "C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost.png","C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/ghost.xnb","TextureProcessor","Texture2DContent",205,8277,0.0009972
 "C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png","C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/pacman_walking.xnb","TextureProcessor","Texture2DContent",1361,16469,0.0009636
