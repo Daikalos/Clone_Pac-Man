@@ -22,11 +22,11 @@ namespace Pacman
             myEnemies = new List<Enemy>();
         }
 
-        public static void Update(GameTime aGameTime)
+        public static void Update(GameTime aGameTime, Player aPlayer)
         {
             for (int i = myEnemies.Count; i > 0; i--)
             {
-                myEnemies[i - 1].Update(aGameTime);
+                myEnemies[i - 1].Update(aGameTime, aPlayer);
                 if (!myEnemies[i - 1].IsAlive)
                 {
                     myEnemies.RemoveAt(i - 1);

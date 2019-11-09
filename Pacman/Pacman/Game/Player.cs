@@ -32,6 +32,11 @@ namespace Pacman
             mySwitchAngle,
             myIsMoving;
 
+        public Rectangle BoundingBox
+        {
+            get => myBoundingBox;
+        }
+
         public Player(Vector2 aPosition, Point aSize, float aSpeed) : base(aPosition, aSize)
         {
             this.mySpeed = aSpeed;
@@ -134,7 +139,7 @@ namespace Pacman
                 myIsMoving = true;
 
                 myDirection = myDestination - myBoundingBox.Center.ToVector2();
-                myDirection.Normalize();
+                myDirection = Normalize(myDirection);
 
                 myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -235,6 +240,15 @@ namespace Pacman
                 return true;
             }
             return false;
+        }
+        private Vector2 Normalize(Vector2 aVector)
+        {
+            if (aVector != Vector2.Zero)
+            {
+                aVector.Normalize();
+                return aVector;
+            }
+            return new Vector2();
         }
 
         private void CollisionCheck()

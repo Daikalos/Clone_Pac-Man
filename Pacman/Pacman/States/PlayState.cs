@@ -24,7 +24,7 @@ namespace Pacman
         {
             Level.Update();
             GameInfo.Update(aGameTime);
-            EnemyManager.Update(aGameTime);
+            EnemyManager.Update(aGameTime, myPlayer);
             myPlayer.Update(aGameTime);
         }
 

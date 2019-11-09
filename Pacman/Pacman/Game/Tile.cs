@@ -1,13 +1,22 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
     class Tile : GameObject
     {
+        private List<Tile> myHistory; //Used for pathfinding
+
         char myTileType;
         float myRotation;
         int myTileForm;
+
+        public List<Tile> History
+        {
+            get => myHistory;
+            set => myHistory = value;
+        }
 
         /// <summary>
         /// - = Empty;

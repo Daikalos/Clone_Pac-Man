@@ -22,6 +22,7 @@ namespace Pacman
             myWalkingAnimation,
             myFleeingAnimation;
         private Texture2D myEyesTexture;
+        private List<Tile> myPath;
         private BehaviourAI myBehaviour;
         private Vector2
             myDestination,
@@ -31,7 +32,9 @@ namespace Pacman
         /// 0 = Up; 1 = Left; 2 = Down; 3 = Right;
         /// </summary>
         private int myAngle;
-        private int myAIType;
+        private int 
+            myAIType,
+            myWalkToTile;
         private float mySpeed;
         private bool 
             mySwitchAngle,
@@ -50,18 +53,20 @@ namespace Pacman
             this.myWalkingAnimation = new AnimationManager(new Point(2, 1), 0.1f, true);
             this.myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
             this.myDestination = myBoundingBox.Center.ToVector2();
+            this.myPath = new List<Tile>();
             this.myIsAlive = true;
+            this.mySwitchAngle = true;
             this.myAngle = 0;
         }
 
-        public void Update(GameTime aGameTime)
+        public void Update(GameTime aGameTime, Player aPlayer)
         {
             myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
 
             switch(myBehaviour)
             {
                 case BehaviourAI.isChasing:
-                    IsChasing(aGameTime);
+                    IsChasing(aGameTime, aPlayer);
                     break;
                 case BehaviourAI.isRandom:
                     IsRandom(aGameTime);
@@ -70,7 +75,7 @@ namespace Pacman
                     IsFullRandom(aGameTime);
                     break;
                 case BehaviourAI.isFleeing:
-                    IsFleeing(aGameTime);
+                    IsFleeing(aGameTime, aPlayer);
                     break;
             }
         }
@@ -80,23 +85,43 @@ namespace Pacman
             myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myPosition, myOrigin, new Point(32), new Point(32), Color.White, 0.0f);
         }
 
-        private void IsChasing(GameTime aGameTime)
+        private void IsChasing(GameTime aGameTime, Player aPlayer)
         {
+            if (mySwitchAngle)
+            {
+                myPath = Pathfinder.FindPath(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2());
+
+                if (myPath.Count > 1)
+                {
+                    myWalkToTile = 1;
+                    mySwitchAngle = false;
+                }
+            }
+
+            if (myPath.Count > 1)
+            {
+                if (Vector2.Distance(myPath[myWalkToTile].GetCenter(), myBoundingBox.Center.ToVector2()) <= 1.0f)
+                {
+                    if (myWalkToTile + 1 < myPath.Count)
+                    {
+                        myWalkToTile++;
+                    }
+                    mySwitchAngle = true;
+                }
+
+                myDirection = myPath[myWalkToTile].GetCenter() - myBoundingBox.Center.ToVector2();
+                myDirection = Normalize(myDirection);
+
+                myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
 
         }
         private void IsRandom(GameTime aGameTime)
         {
-            if (Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1.TileType != '-' && Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1.TileType != '&') //Prevent AI getting stuck in starting area
+            if (mySwitchAngle)
             {
-                if (mySwitchAngle)
-                {
-                    int tempRNG = StaticRandom.RandomNumber(0, 4);
-                    myAngle = tempRNG;
-                }
-            }
-            else
-            {
-                myAngle = 0;
+                int tempRNG = StaticRandom.RandomNumber(0, 4);
+                myAngle = tempRNG;
             }
 
             switch (myAngle)
@@ -121,7 +146,7 @@ namespace Pacman
                 mySwitchAngle = false;
 
                 myDirection = myDestination - myBoundingBox.Center.ToVector2();
-                myDirection.Normalize();
+                myDirection = Normalize(myDirection);
 
                 myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -134,15 +159,8 @@ namespace Pacman
         {
             if (mySwitchAngle)
             {
-                if (Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1.TileType != '-' && Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1.TileType != '&') //Prevent AI getting stuck in starting area
-                {
-                    int tempRNG = StaticRandom.RandomNumber(0, 4);
-                    myAngle = tempRNG;
-                }
-                else
-                {
-                    myAngle = 0;
-                }
+                int tempRNG = StaticRandom.RandomNumber(0, 4);
+                myAngle = tempRNG;
 
                 switch (myAngle)
                 {
@@ -166,7 +184,7 @@ namespace Pacman
                 mySwitchAngle = false;
 
                 myDirection = myDestination - myBoundingBox.Center.ToVector2();
-                myDirection.Normalize();
+                myDirection = Normalize(myDirection);
 
                 myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -175,7 +193,7 @@ namespace Pacman
                 mySwitchAngle = true;
             }
         }
-        private void IsFleeing(GameTime aGameTime)
+        private void IsFleeing(GameTime aGameTime, Player aPlayer)
         {
 
         }
@@ -198,6 +216,15 @@ namespace Pacman
                 return true;
             }
             return false;
+        }
+        private Vector2 Normalize(Vector2 aVector)
+        {
+            if (aVector != Vector2.Zero)
+            {
+                aVector.Normalize();
+                return aVector;
+            }
+            return new Vector2();
         }
     }
 }
