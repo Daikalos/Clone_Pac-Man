@@ -33,6 +33,15 @@ namespace Pacman
             return myCurrentMouseState.RightButton == ButtonState.Pressed && myPreviousMouseState.RightButton == ButtonState.Released;
         }
 
+        public static bool LeftHold()
+        {
+            return myCurrentMouseState.LeftButton == ButtonState.Pressed;
+        }
+        public static bool RightHold()
+        {
+            return myCurrentMouseState.RightButton == ButtonState.Pressed;
+        }
+
         //Should be called at beginning of Update in Game
         public static void Update()
         {

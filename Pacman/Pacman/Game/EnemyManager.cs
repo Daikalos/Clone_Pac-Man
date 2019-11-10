@@ -11,25 +11,37 @@ namespace Pacman
     static class EnemyManager
     {
         static List<Enemy> myEnemies;
+        static float[] myRespawnTimer;
+        static float myRespawnDelay;
 
         public static List<Enemy> Enemies
         {
             get => myEnemies;
         }
 
-        public static void Initialize()
+        public static void Initialize(float aRespawnDelay)
         {
             myEnemies = new List<Enemy>();
+            myRespawnDelay = aRespawnDelay;
         }
 
         public static void Update(GameTime aGameTime, Player aPlayer)
         {
+            for (int i = 0; i < myRespawnTimer.Length; i++)
+            {
+                if (myRespawnTimer[i] > 0)
+                {
+                    myRespawnTimer[i] -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+                }
+            }
+
             for (int i = myEnemies.Count; i > 0; i--)
             {
                 myEnemies[i - 1].Update(aGameTime, aPlayer);
                 if (!myEnemies[i - 1].IsAlive)
                 {
                     myEnemies.RemoveAt(i - 1);
+                    myRespawnTimer[i - 1] = myRespawnDelay;
                 }
             }
         }
@@ -56,6 +68,7 @@ namespace Pacman
                     }
                 }
             }
+            myRespawnTimer = new float[myEnemies.Count];
         }
         public static void RemoveAll()
         {

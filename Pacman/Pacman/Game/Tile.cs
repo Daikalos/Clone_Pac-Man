@@ -19,10 +19,11 @@ namespace Pacman
         }
 
         /// <summary>
+        /// % = Void;
         /// - = Empty;
-        /// . = Score/Empty;
-        /// & = Spawn;
+        /// . = Snack;
         /// # = Block;
+        /// / = PowerUp;
         /// </summary>
         public char TileType
         {
@@ -119,7 +120,7 @@ namespace Pacman
                     myTexture = ResourceManager.RequestTexture("Snack");
                     break;
                 case '/':
-                    myTexture = ResourceManager.RequestTexture("Powerup_00");
+                    myTexture = ResourceManager.RequestTexture("PowerUp_00");
                     break;
             }
         }

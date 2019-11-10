@@ -309,6 +309,7 @@ namespace Pacman
                 if (Vector2.Distance(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2()) < Level.TileSize.X / 2)
                 {
                     myIsAlive = false;
+                    GameInfo.AddScore(aPlayer.BoundingBox.Center.ToVector2(), 300);
                 }
             }
         }
