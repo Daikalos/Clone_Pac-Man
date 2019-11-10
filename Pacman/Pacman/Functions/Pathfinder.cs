@@ -16,8 +16,8 @@ namespace Pacman
             List<Tile> tempVisited = new List<Tile>();
             Queue<Tile> tempWork = new Queue<Tile>();
 
-            Tile tempStart = Level.GetTileAtPos(aStart).Item1;
-            Tile tempGoal = Level.GetTileAtPos(aGoal).Item1;
+            Tile tempStart = Level.GetClosestTile(aStart);
+            Tile tempGoal = Level.GetClosestTile(aGoal);
 
             tempStart.History = new List<Tile>();
             tempVisited.Add(tempStart);
@@ -39,10 +39,9 @@ namespace Pacman
                         Tuple<Tile, bool> tempCheckTile = Level.GetTileAtPos(new Vector2(tempCurrent.GetCenter().X + x * Level.TileSize.X, tempCurrent.GetCenter().Y));
                         if (tempCheckTile.Item2)
                         {
-                            if (tempCheckTile.Item1.TileType == '.' || tempCheckTile.Item1.TileType == '-')
+                            if (tempCheckTile.Item1.TileType != '#')
                             {
                                 Tile tempCurrentNeighbor = tempCheckTile.Item1;
-
                                 if (!tempVisited.Contains(tempCurrentNeighbor))
                                 {
                                     tempCurrentNeighbor.History = new List<Tile>(tempCurrent.History);
@@ -58,10 +57,9 @@ namespace Pacman
                         Tuple<Tile, bool> tempCheckTile = Level.GetTileAtPos(new Vector2(tempCurrent.GetCenter().X, tempCurrent.GetCenter().Y + y * Level.TileSize.Y));
                         if (tempCheckTile.Item2)
                         {
-                            if (tempCheckTile.Item1.TileType == '.' || tempCheckTile.Item1.TileType == '-')
+                            if (tempCheckTile.Item1.TileType != '#')
                             {
                                 Tile tempCurrentNeighbor = tempCheckTile.Item1;
-
                                 if (!tempVisited.Contains(tempCurrentNeighbor))
                                 {
                                     tempCurrentNeighbor.History = new List<Tile>(tempCurrent.History);

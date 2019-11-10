@@ -118,6 +118,9 @@ namespace Pacman
                 case '.':
                     myTexture = ResourceManager.RequestTexture("Snack");
                     break;
+                case '/':
+                    myTexture = ResourceManager.RequestTexture("Powerup_00");
+                    break;
             }
         }
     }

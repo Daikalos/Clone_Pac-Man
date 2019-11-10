@@ -9,7 +9,6 @@ namespace Pacman
         private enum PlayerState
         {
             isWalking,
-            isEating,
             isDead
         }
 
@@ -27,19 +26,27 @@ namespace Pacman
         private int myAngle;
         private float 
             mySpeed,
-            myRotation;
+            myRotation,
+            myEatingTimer,
+            myEatingDelay;
         private bool 
             mySwitchAngle,
-            myIsMoving;
+            myIsMoving,
+            myIsEating;
 
         public Rectangle BoundingBox
         {
             get => myBoundingBox;
         }
+        public bool IsEating
+        {
+            get => myIsEating;
+        }
 
-        public Player(Vector2 aPosition, Point aSize, float aSpeed) : base(aPosition, aSize)
+        public Player(Vector2 aPosition, Point aSize, float aSpeed, float aEatingDelay) : base(aPosition, aSize)
         {
             this.mySpeed = aSpeed;
+            this.myEatingDelay = aEatingDelay;
 
             this.myWalkingAnimation = new AnimationManager(new Point(4, 1), 0.1f, true);
             this.myPlayerState = PlayerState.isWalking;
@@ -57,12 +64,18 @@ namespace Pacman
                     Movement(aGameTime);
                     OutsideBounds();
                     break;
-                case PlayerState.isEating:
-
-                    break;
                 case PlayerState.isDead:
 
                     break;
+            }
+
+            if (myEatingTimer > 0)
+            {
+                myEatingTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                myIsEating = false;
             }
 
             CollisionCheck();
@@ -81,9 +94,6 @@ namespace Pacman
                     {
                         aSpriteBatch.Draw(myTexture, myDrawBox, new Rectangle(myTexture.Width / 4, 0, myTexture.Width / 4, myTexture.Height), Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
                     }
-                    break;
-                case PlayerState.isEating:
-
                     break;
                 case PlayerState.isDead:
 
@@ -254,6 +264,7 @@ namespace Pacman
         private void CollisionCheck()
         {
             CollisionSnack();
+            CollisionPowerUp();
         }
         private void CollisionSnack()
         {
@@ -261,6 +272,18 @@ namespace Pacman
             if (tempTile.TileType == '.')
             {
                 GameInfo.AddScore(myBoundingBox.Center.ToVector2(), 100);
+
+                tempTile.TileType = '-';
+                tempTile.SetTexture();
+            }
+        }
+        private void CollisionPowerUp()
+        {
+            Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1;
+            if (tempTile.TileType == '/')
+            {
+                myIsEating = true;
+                myEatingTimer = myEatingDelay;
 
                 tempTile.TileType = '-';
                 tempTile.SetTexture();

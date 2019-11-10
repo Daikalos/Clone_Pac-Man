@@ -43,6 +43,28 @@ namespace Pacman
             }
             return new Tuple<Tile, bool>(myTiles[0, 0], false);
         }
+        public static Tile GetClosestTile(Vector2 aPos)
+        {
+            Tile tempClosest = null;
+            float tempMinDistance = float.MaxValue;
+
+            for (int i = 0; i < myTiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < myTiles.GetLength(1); j++)
+                {
+                    if (myTiles[i, j].TileType != '#')
+                    {
+                        float tempDistance = Vector2.Distance(myTiles[i, j].GetCenter(), aPos);
+                        if (tempDistance < tempMinDistance)
+                        {
+                            tempClosest = myTiles[i, j];
+                            tempMinDistance = tempDistance;
+                        }
+                    }               
+                }
+            }
+            return tempClosest;
+        }
 
         public static void LoadLevel(string aFilePath)
         {
@@ -110,7 +132,7 @@ namespace Pacman
                     {
                         if (CheckIn(i + k, j))
                         {
-                            if (myTiles[i + k, j].TileType == '.' || myTiles[i + k, j].TileType == '-')
+                            if (myTiles[i + k, j].TileType != '#' && myTiles[i, j + k].TileType != '%')
                             {
                                 tempDirection = k;
                                 tempTileForm++;
@@ -119,7 +141,7 @@ namespace Pacman
                         }
                         if (CheckIn(i, j + k))
                         {
-                            if (myTiles[i, j + k].TileType == '.' || myTiles[i, j + k].TileType == '-')
+                            if (myTiles[i, j + k].TileType != '#' && myTiles[i, j + k].TileType != '%')
                             {
                                 if (k < 0)
                                 {
@@ -167,7 +189,7 @@ namespace Pacman
                             {
                                 if (CheckIn(i + k, j + l))
                                 {
-                                    if (myTiles[i + k, j + l].TileType == '.')
+                                    if (myTiles[i + k, j + l].TileType != '#' && myTiles[i + k, j + l].TileType != '%')
                                     {
                                         tempTileForm = 2;
                                         tempDirection = k;
