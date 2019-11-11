@@ -7,7 +7,7 @@ namespace Pacman
     class Tile : GameObject
     {
         private List<Tile> myHistory; //Used for pathfinding
-
+        private Rectangle mySourceRect;
         char myTileType;
         float myRotation;
         int myTileForm;
@@ -78,7 +78,6 @@ namespace Pacman
         {
             return new Rectangle(myBoundingBox.X - (int)myOrigin.X, myBoundingBox.Y - (int)myOrigin.Y, mySize.X, mySize.Y).Center.ToVector2();
         }
-
         public Vector2 Position
         {
             get => myPosition;
@@ -102,7 +101,7 @@ namespace Pacman
             if (myTexture != null)
             {
                 aSpriteBatch.Draw(myTexture, myBoundingBox,
-                    null, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+                    mySourceRect, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
             }
         }
 
@@ -122,6 +121,43 @@ namespace Pacman
                 case '/':
                     myTexture = ResourceManager.RequestTexture("PowerUp_00");
                     break;
+                case '%':
+                    myTexture = null;
+                    break;
+            }
+            if (myTexture != null)
+            {
+                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
+            }
+        }
+
+        public void SetTextureEditor()
+        {
+            switch (myTileType)
+            {
+                case '-':
+                    myTexture = ResourceManager.RequestTexture("Empty");
+                    break;
+                case '#':
+                    myTexture = ResourceManager.RequestTexture("Tile_Block-" + myTileForm.ToString());
+                    break;
+                case '.':
+                    myTexture = ResourceManager.RequestTexture("Snack");
+                    break;
+                case '/':
+                    myTexture = ResourceManager.RequestTexture("PowerUp_00");
+                    break;
+                case '&':
+                    myTexture = ResourceManager.RequestTexture("Ghost");
+                    mySourceRect = new Rectangle(0, 0, myTexture.Width / 2, myTexture.Height);
+                    break;
+                case '%':
+                    myTexture = null;
+                    break;
+            }
+            if (myTexture != null && myTileType != '&')
+            {
+                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             }
         }
     }

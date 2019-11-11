@@ -7,11 +7,13 @@ namespace Pacman
 {
     class EditorState : State
     {
-        private Tile mySelectedTile;
+        private Tuple<Tile, bool> mySelectedTile;
         private Texture2D
             myBlock,
-            myEmpty,
-            myPowerUp;
+            mySnack,
+            myPowerUp,
+            myGhost;
+        SpriteFont my8bitFont;
         private int mySelection;
 
         public EditorState(MainGame aGame) : base(aGame)
@@ -22,43 +24,65 @@ namespace Pacman
 
         public override void Update(GameWindow aWindow, GameTime aGameTime)
         {
-            switch(mySelection)
+            mySelectedTile = Level.GetTileAtPos(KeyMouseReader.myCurrentMouseState.Position.ToVector2());
+
+            if (mySelectedTile.Item2)
             {
-                case 0:
-                    if (mySelectedTile != Level.GetTileAtPos(KeyMouseReader.myCurrentMouseState.Position.ToVector2()).Item1)
+                if (KeyMouseReader.LeftHold())
+                {
+                    switch (mySelection)
                     {
-                        if (KeyMouseReader.LeftHold())
-                        {
-                            mySelectedTile = Level.GetTileAtPos(KeyMouseReader.myCurrentMouseState.Position.ToVector2()).Item1;
-                            if (mySelectedTile.TileType != '#')
-                            {
-                                mySelectedTile.TileType = '#';
-                            }
-                            mySelectedTile.TileForm = 0;
-                            mySelectedTile.SetTexture();
-                        }
-                        if (KeyMouseReader.RightHold())
-                        {
-                            mySelectedTile = Level.GetTileAtPos(KeyMouseReader.myCurrentMouseState.Position.ToVector2()).Item1;
-                            if (mySelectedTile.TileType == '#')
-                            {
-                                mySelectedTile.TileType = '-';
-                            }
-                            mySelectedTile.SetTexture();
-                        }
+                        case 0:
+                            mySelectedTile.Item1.TileType = '#';
+                            mySelectedTile.Item1.TileForm = 0;
+                            break;
+                        case 1:
+                            mySelectedTile.Item1.TileType = '.';
+                            break;
+                        case 2:
+                            mySelectedTile.Item1.TileType = '%';
+                            break;
+                        case 3:
+                            mySelectedTile.Item1.TileType = '/';
+                            break;
+                        case 4:
+                            mySelectedTile.Item1.TileType = '&';
+                            break;
+                        case 5:
+
+                            break;
+                        case 6:
+
+                            break;
                     }
-                    break;
-                case 1:
+                    mySelectedTile.Item1.SetTextureEditor();
+                }
 
-                    break;
-                case 2:
-
-                    break;
+                if (KeyMouseReader.RightHold())
+                {
+                    mySelectedTile.Item1.TileType = '-';
+                    mySelectedTile.Item1.SetTexture();
+                }
             }
 
-            if (!KeyMouseReader.LeftHold() && !KeyMouseReader.RightHold())
+            if (KeyMouseReader.KeyPressed(Keys.Up))
             {
-                mySelectedTile = null;
+                if (mySelection > 0)
+                {
+                    mySelection--;
+                }
+            }
+            if (KeyMouseReader.KeyPressed(Keys.Down))
+            {
+                if (mySelection < 6)
+                {
+                    mySelection++;
+                }
+            }
+
+            if (KeyMouseReader.KeyPressed(Keys.Escape))
+            {
+                myGame.ChangeState(new MenuState(myGame));
             }
 
             Level.Update();
@@ -67,15 +91,34 @@ namespace Pacman
         public override void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, GameTime aGameTime)
         {
             Level.DrawTiles(aSpriteBatch);
+
+            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, ">",
+                new Vector2(Level.MapSize.X + 20, 70 + (40 * mySelection)),
+                Color.GhostWhite, 0.6f);
+
+            aSpriteBatch.Draw(myBlock, new Vector2(Level.MapSize.X + 50, 70), null, Color.White, 0.0f,
+                new Vector2(myBlock.Width / 2, myBlock.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+            aSpriteBatch.Draw(mySnack, new Vector2(Level.MapSize.X + 50, 110), null, Color.White, 0.0f,
+                new Vector2(mySnack.Width / 2, mySnack.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+            aSpriteBatch.Draw(myPowerUp, new Vector2(Level.MapSize.X + 50, 190), null, Color.White, 0.0f, 
+                new Vector2(myPowerUp.Width / 2, myPowerUp.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+            aSpriteBatch.Draw(myGhost, new Vector2(Level.MapSize.X + 50, 230), new Rectangle(0, 0, myGhost.Width / 2, myGhost.Height), Color.White, 0.0f, 
+                new Vector2(myGhost.Width / 4, myGhost.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+
+            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 40, 270), Color.White, 1.0f);
+            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 40, 310), Color.White, 1.0f);
         }
 
         public override void LoadContent()
         {
             Level.SetTileTexture();
 
+            my8bitFont = ResourceManager.RequestFont("8-bit");
+
             myBlock = ResourceManager.RequestTexture("Tile_Block-0");
-            myEmpty = ResourceManager.RequestTexture("Empty");
+            mySnack = ResourceManager.RequestTexture("Snack");
             myPowerUp = ResourceManager.RequestTexture("PowerUp_00");
+            myGhost = ResourceManager.RequestTexture("Ghost");
         }
     }
 }
