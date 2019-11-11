@@ -7,10 +7,10 @@ namespace Pacman
     class Tile : GameObject
     {
         private List<Tile> myHistory; //Used for pathfinding
-        private Rectangle mySourceRect;
-        char myTileType;
-        float myRotation;
-        int myTileForm;
+
+        private char myTileType;
+        private float myRotation;
+        private int myTileForm;
 
         public List<Tile> History
         {
@@ -101,7 +101,7 @@ namespace Pacman
             if (myTexture != null)
             {
                 aSpriteBatch.Draw(myTexture, myBoundingBox,
-                    mySourceRect, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+                    null, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
             }
         }
 
@@ -125,10 +125,6 @@ namespace Pacman
                     myTexture = null;
                     break;
             }
-            if (myTexture != null)
-            {
-                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
-            }
         }
 
         public void SetTextureEditor()
@@ -148,16 +144,11 @@ namespace Pacman
                     myTexture = ResourceManager.RequestTexture("PowerUp_00");
                     break;
                 case '&':
-                    myTexture = ResourceManager.RequestTexture("Ghost");
-                    mySourceRect = new Rectangle(0, 0, myTexture.Width / 2, myTexture.Height);
+                    myTexture = ResourceManager.RequestTexture("Tile_Ghost");
                     break;
                 case '%':
                     myTexture = null;
                     break;
-            }
-            if (myTexture != null && myTileType != '&')
-            {
-                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             }
         }
     }

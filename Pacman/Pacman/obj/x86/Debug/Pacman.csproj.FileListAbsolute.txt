@@ -72,3 +72,8 @@ C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Cont
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost_frightened.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost-eyes_frightened.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost-eyes.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\powerup_00.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost-eyes.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost-eyes_frightened.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost_frightened.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_ghost.xnb

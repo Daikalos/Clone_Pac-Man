@@ -4,23 +4,25 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/blackRect.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost_frightened.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost-eyes.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost-eyes_frightened.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/empty.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/powerup_00.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/snack.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-0.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-1.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-2.png</File>
-    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-3.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Fonts/8bit_spritefont.spritefont</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/blackRect.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost_frightened.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost-eyes.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost-eyes_frightened.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/empty.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/powerup_00.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/snack.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-0.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-1.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-2.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-3.png</File>
+    <File>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_ghost.png</File>
   </SourceFiles>
   <DestFiles>
     <File>Fonts/8bit.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

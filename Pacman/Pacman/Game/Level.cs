@@ -66,9 +66,10 @@ namespace Pacman
             return tempClosest;
         }
 
-        public static void LoadLevel(string aFilePath)
+        public static void LoadLevel(Point aTileSize)
         {
-            myLevelBuilder = File.ReadAllLines(aFilePath);
+            myLevelBuilder = File.ReadAllLines(GameInfo.FolderLevels + GameInfo.CurrentLevel);
+            myTileSize = aTileSize;
 
             int tempSizeX = myLevelBuilder[0].Length;
             int tempSizeY = myLevelBuilder.Length;
@@ -79,7 +80,6 @@ namespace Pacman
             {
                 for (int y = 0; y < tempSizeY; y++)
                 {
-                    myTileSize = new Point(32);
                     myTiles[x, y] = new Tile(
                         new Vector2(x * myTileSize.X, y * myTileSize.Y),
                         myTileSize);
@@ -90,6 +90,29 @@ namespace Pacman
             myMapSize = new Point(
                 myTiles.GetLength(0) * myTileSize.X, 
                 myTiles.GetLength(1) * myTileSize.Y);
+        }
+        public static void SaveLevel(string aLevelName)
+        {
+            string tempPath = GameInfo.FolderLevels + aLevelName;
+
+            if (File.Exists(tempPath))
+            {
+                File.Delete(tempPath);
+            }
+            else
+            {
+                FileStream tempFS = File.Create(tempPath);
+                tempFS.Close();
+            }
+
+            for (int i = 0; i < myTiles.GetLength(1); i++)
+            {
+                for (int j = 0; j < myTiles.GetLength(0); j++)
+                {
+                    File.AppendAllText(tempPath, myTiles[j, i].TileType.ToString());
+                }
+                File.AppendAllText(tempPath, Environment.NewLine);
+            }
         }
 
         public static void Update()
@@ -161,6 +184,10 @@ namespace Pacman
                         {
                             tempDirection = -1;
                         }
+                    }
+                    if (tempTileForm == 4 && myTiles[i, j].TileType == '#')
+                    {
+                        tempTileForm = 0;
                     }
                     if (tempTileForm == 3) //Fix rotation for situational tile direction on 3-sided block types
                     {

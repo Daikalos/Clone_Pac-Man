@@ -12,6 +12,7 @@ namespace Pacman
     {
         static List<Enemy> myEnemies;
         static float[] myRespawnTimer;
+        static bool[] myRespawnEnemy;
         static float myRespawnDelay;
 
         public static List<Enemy> Enemies
@@ -29,9 +30,17 @@ namespace Pacman
         {
             for (int i = 0; i < myRespawnTimer.Length; i++)
             {
-                if (myRespawnTimer[i] > 0)
+                if (myRespawnEnemy[i] && !aPlayer.IsEating)
                 {
-                    myRespawnTimer[i] -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+                    if (myRespawnTimer[i] > 0)
+                    {
+                        myRespawnTimer[i] -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+                    }
+                    else
+                    {
+                        AddEnemy(i);
+                        myRespawnEnemy[i] = false;
+                    }
                 }
             }
 
@@ -40,8 +49,10 @@ namespace Pacman
                 myEnemies[i - 1].Update(aGameTime, aPlayer);
                 if (!myEnemies[i - 1].IsAlive)
                 {
+                    myRespawnTimer[myEnemies[i - 1].AIType] = myRespawnDelay;
+                    myRespawnEnemy[myEnemies[i - 1].AIType] = true;
+
                     myEnemies.RemoveAt(i - 1);
-                    myRespawnTimer[i - 1] = myRespawnDelay;
                 }
             }
         }
@@ -54,7 +65,22 @@ namespace Pacman
             }
         }
 
-        public static void AddEnemy()
+        public static void AddEnemy(int aAIType)
+        {
+            for (int x = 0; x < Level.GetTiles.GetLength(0); x++)
+            {
+                for (int y = 0; y < Level.GetTiles.GetLength(1); y++)
+                {
+                    if (Level.GetTiles[x, y].TileType == '&')
+                    {
+                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, aAIType));
+                        EnemyManager.SetTexture();
+                        return;
+                    }
+                }
+            }
+        }
+        public static void AddEnemies()
         {
             int tempAIType = 0;
             for (int x = 0; x < Level.GetTiles.GetLength(0); x++)
@@ -68,7 +94,10 @@ namespace Pacman
                     }
                 }
             }
+            EnemyManager.SetTexture();
+
             myRespawnTimer = new float[myEnemies.Count];
+            myRespawnEnemy = new bool[myEnemies.Count];
         }
         public static void RemoveAll()
         {

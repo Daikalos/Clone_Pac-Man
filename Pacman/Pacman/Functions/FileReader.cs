@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace Pacman
 {
@@ -38,6 +39,24 @@ namespace Pacman
                     }
                     return tempFoundInfo;
                 }
+            }
+            return new string[0];
+        }
+
+        public static string[] FindFileNames(string aPath)
+        {
+            DirectoryInfo tempInfo = new DirectoryInfo(aPath);
+            FileInfo[] tempFiles = tempInfo.GetFiles("*.txt");
+
+            if (tempFiles.Length > 0)
+            {
+                string[] tempFileNames = new string[tempFiles.Length];
+                for (int i = 0; i < tempFiles.Length; i++)
+                {
+                    tempFileNames[i] = tempFiles[i].Name;
+                }
+
+                return tempFileNames;
             }
             return new string[0];
         }

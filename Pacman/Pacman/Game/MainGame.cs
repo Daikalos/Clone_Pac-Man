@@ -34,6 +34,8 @@ namespace Pacman
             ResourceManager.Initialize();
 
             GameInfo.Initialize(Window, 0.5f);
+            GameInfo.CurrentLevel = "Level01";
+            GameInfo.FolderLevels = "../../../../Levels/";
 
             ChangeState(new MenuState(this));
 
@@ -53,6 +55,7 @@ namespace Pacman
             ResourceManager.AddTexture("Snack", this.Content.Load<Texture2D>("Sprites/Tileset/snack"));
             ResourceManager.AddTexture("PowerUp_00", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
+            ResourceManager.AddTexture("Tile_Ghost", this.Content.Load<Texture2D>("Sprites/Tileset/tile_ghost"));
             ResourceManager.AddTexture("Black_Rect", this.Content.Load<Texture2D>("Sprites/blackRect"));
             ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
             ResourceManager.AddTexture("Ghost", this.Content.Load<Texture2D>("Sprites/ghost"));

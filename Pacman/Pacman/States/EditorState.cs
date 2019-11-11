@@ -18,14 +18,14 @@ namespace Pacman
 
         public EditorState(MainGame aGame) : base(aGame)
         {
-            Level.LoadLevel("../../../../Levels/Level_Template.txt");
+            GameInfo.CurrentLevel = "Level_Template.txt";
+            Level.LoadLevel(new Point(32));
             aGame.IsMouseVisible = true;
         }
 
         public override void Update(GameWindow aWindow, GameTime aGameTime)
         {
             mySelectedTile = Level.GetTileAtPos(KeyMouseReader.myCurrentMouseState.Position.ToVector2());
-
             if (mySelectedTile.Item2)
             {
                 if (KeyMouseReader.LeftHold())
@@ -48,21 +48,14 @@ namespace Pacman
                         case 4:
                             mySelectedTile.Item1.TileType = '&';
                             break;
-                        case 5:
-
-                            break;
-                        case 6:
-
-                            break;
                     }
-                    mySelectedTile.Item1.SetTextureEditor();
                 }
 
                 if (KeyMouseReader.RightHold())
                 {
                     mySelectedTile.Item1.TileType = '-';
-                    mySelectedTile.Item1.SetTexture();
                 }
+                mySelectedTile.Item1.SetTextureEditor();
             }
 
             if (KeyMouseReader.KeyPressed(Keys.Up))
@@ -80,6 +73,18 @@ namespace Pacman
                 }
             }
 
+            if (KeyMouseReader.KeyPressed(Keys.Enter))
+            {
+                switch (mySelection)
+                {
+                    case 5:
+
+                        break;
+                    case 6:
+                        SaveLevel();
+                        break;
+                }
+            }
             if (KeyMouseReader.KeyPressed(Keys.Escape))
             {
                 myGame.ChangeState(new MenuState(myGame));
@@ -107,6 +112,38 @@ namespace Pacman
 
             StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 40, 270), Color.White, 1.0f);
             StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 40, 310), Color.White, 1.0f);
+        }
+
+        private void SaveLevel()
+        {
+            int tempLevel = 1;
+            string[] tempName = FileReader.FindFileNames(GameInfo.FolderLevels);
+            for (int i = 0; i < tempName.Length; i++)
+            {
+                tempName[i] = tempName[i].Replace("Level", "");
+                tempName[i] = tempName[i].Replace(".txt", "");
+            }
+            for (int i = 0; i < tempName.Length; i++)
+            {
+                if (tempName[i] != "Level_Template")
+                {
+                    int tempResult = 0;
+                    Int32.TryParse(tempName[i], out tempResult);
+
+                    if (tempResult != tempLevel)
+                    {
+                        tempLevel = (i + 1);
+                    }
+                }
+            }
+            if (tempLevel < 10)
+            {
+                Level.SaveLevel("Level0" + tempLevel + ".txt");
+            }
+            else
+            {
+                Level.SaveLevel("Level" + tempLevel + ".txt");
+            }
         }
 
         public override void LoadContent()

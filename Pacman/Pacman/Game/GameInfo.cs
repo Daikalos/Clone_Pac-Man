@@ -10,17 +10,30 @@ namespace Pacman
     {
         private static Texture2D myRect; //Blacks out right side of screen
         private static Vector2 myDrawPos;
+        private static string 
+            myCurrentLevel,
+            myFolderLevels;
         private static int[] myHighScores;
         private static int
             myScore,
             myDrawScore;
         private static float
             myDSTimer,
-            myDSTimerMax;
+            myDSDelay;
 
         public static Vector2 DrawPos
         {
             set => myDrawPos = value;
+        }
+        public static string CurrentLevel
+        {
+            get => myCurrentLevel;
+            set => myCurrentLevel = value;
+        }
+        public static string FolderLevels
+        {
+            get => myFolderLevels;
+            set => myFolderLevels = value;
         }
         public static int[] HighScores
         {
@@ -35,9 +48,9 @@ namespace Pacman
             get => myHighScores.Max();
         }
 
-        public static void Initialize(GameWindow aWindow, float aDSTimerMax)
+        public static void Initialize(GameWindow aWindow, float aDSDelay)
         {
-            myDSTimerMax = aDSTimerMax;
+            myDSDelay = aDSDelay;
 
             myDrawPos = Vector2.Zero;
             myScore = 0;
@@ -82,7 +95,7 @@ namespace Pacman
             myDrawPos = new Vector2(aPos.X, aPos.Y - Level.TileSize.Y);
             myScore += someScore;
             myDrawScore = someScore;
-            myDSTimer = myDSTimerMax;
+            myDSTimer = myDSDelay;
         }
 
         public static void SetRectTexture(string aName)

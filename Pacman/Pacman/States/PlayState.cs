@@ -13,11 +13,11 @@ namespace Pacman
 
         public PlayState(MainGame aGame, GameWindow aWindow) : base(aGame)
         {
-            Level.LoadLevel("../../../../Levels/Level01.txt");
+            Level.LoadLevel(new Point(32));
             aGame.IsMouseVisible = false;
 
-            EnemyManager.Initialize(5.0f);
-            EnemyManager.AddEnemy();
+            EnemyManager.Initialize(10.0f);
+            EnemyManager.AddEnemies();
 
             this.myPlayer = new Player(new Vector2(Level.TileSize.X * 12, aWindow.ClientBounds.Height - Level.TileSize.Y * 2), Level.TileSize, 140.0f, 9.0f);
             this.myIsPaused = false;
@@ -72,7 +72,6 @@ namespace Pacman
         public override void LoadContent()
         {
             Level.SetTileTexture();
-            EnemyManager.SetTexture();
             myPlayer.SetTexture("Pacman_Walking");
 
             my8bitFont = ResourceManager.RequestFont("8-bit");

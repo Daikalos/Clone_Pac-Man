@@ -44,6 +44,10 @@ namespace Pacman
         {
             get => myIsAlive;
         }
+        public int AIType
+        {
+            get => myAIType;
+        }
 
         public Enemy(Vector2 aPosition, Point aSize, float aSpeed, int aAIType) : base(aPosition, aSize)
         {
