@@ -59,14 +59,14 @@ namespace Pacman
 
         public static void LoadHighScore(string aPath)
         {
-            string[] tempScores = FileReader.FindInfo(aPath, "Highscore", '=');
+            string[] tempScores = FileReader.FindInfo(aPath, "HighScore", '=');
             myHighScores = Array.ConvertAll(tempScores, s => Int32.Parse(s));
             Array.Sort(myHighScores);
             Array.Reverse(myHighScores);
         }
         public static void SaveHighScore(string aPath)
         {
-            File.AppendAllText(aPath, Environment.NewLine + "Highscore=" + myScore.ToString());
+            File.AppendAllText(aPath, Environment.NewLine + "HighScore=" + myScore.ToString());
         }
 
         public static void Update(GameTime aGameTime)

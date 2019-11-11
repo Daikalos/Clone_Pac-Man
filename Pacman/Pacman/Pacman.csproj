@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\DeadState.cs" />
     <Compile Include="States\EditorState.cs" />
-    <Compile Include="States\HighScoreState.cs" />
+    <Compile Include="States\LeaderboardState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\PlayState.cs" />
     <Compile Include="States\State.cs" />

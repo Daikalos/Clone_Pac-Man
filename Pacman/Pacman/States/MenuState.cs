@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -28,21 +27,6 @@ namespace Pacman
 
         public override void Update(GameWindow aWindow, GameTime aGameTime)
         {
-            if (KeyMouseReader.KeyPressed(Keys.Up))
-            {
-                if (mySelection > 0)
-                {
-                    mySelection--;
-                }
-            }
-            if (KeyMouseReader.KeyPressed(Keys.Down))
-            {
-                if (mySelection < mySelectionAmount)
-                {
-                    mySelection++;
-                }
-            }
-
             if (!myLoadLevel)
             {
                 if (KeyMouseReader.KeyPressed(Keys.Enter))
@@ -52,13 +36,13 @@ namespace Pacman
                         case 0:
                             myLoadLevel = true;
                             myLevelNames = FileReader.FindFileNames("../../../../Levels/");
-                            mySelectionAmount = myLevelNames.Length - 1;
+                            mySelectionAmount = myLevelNames.Length - 2;
                             break;
                         case 1:
                             myGame.ChangeState(new EditorState(myGame));
                             break;
                         case 2:
-                            myGame.ChangeState(new HighScoreState(myGame));
+                            myGame.ChangeState(new LeaderboardState(myGame));
                             break;
                         case 3:
                             myGame.Exit();
@@ -76,6 +60,21 @@ namespace Pacman
                 {
                     GameInfo.CurrentLevel = myLevelNames[mySelection];
                     myGame.ChangeState(new PlayState(myGame, aWindow));
+                }
+            }
+
+            if (KeyMouseReader.KeyPressed(Keys.Up))
+            {
+                if (mySelection > 0)
+                {
+                    mySelection--;
+                }
+            }
+            if (KeyMouseReader.KeyPressed(Keys.Down))
+            {
+                if (mySelection < mySelectionAmount)
+                {
+                    mySelection++;
                 }
             }
         }
@@ -110,9 +109,12 @@ namespace Pacman
                     string tempName = myLevelNames[i];
                     tempName = tempName.Replace(".txt", "");
 
-                    StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, tempName,
-                        new Vector2((aWindow.ClientBounds.Width / 2) - 70, (aWindow.ClientBounds.Height / 2) + 20 + (30 * i)),
-                        Color.White, 0.7f);
+                    if (tempName != "Level_Template")
+                    {
+                        StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, tempName,
+                            new Vector2((aWindow.ClientBounds.Width / 2) - 70, (aWindow.ClientBounds.Height / 2) + 20 + (30 * i)),
+                            Color.White, 0.7f);
+                    }
                 }
                 StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "Press return to go back to menu", new Vector2(12, aWindow.ClientBounds.Height - 12), Color.DarkOrange, 0.5f);
             }

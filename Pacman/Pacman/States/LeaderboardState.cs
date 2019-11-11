@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    class HighScoreState : State
+    class LeaderboardState : State
     {
-        public HighScoreState(MainGame aGame) : base(aGame)
+        public LeaderboardState(MainGame aGame) : base(aGame)
         {
 
         }

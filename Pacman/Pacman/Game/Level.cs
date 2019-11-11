@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -95,7 +93,7 @@ namespace Pacman
         {
             string tempPath = GameInfo.FolderLevels + aLevelName;
 
-            if (File.Exists(tempPath))
+            if (!File.Exists(tempPath))
             {
                 File.Delete(tempPath);
             }
@@ -237,6 +235,16 @@ namespace Pacman
                     {
                         myTiles[i, j].SetRotation(tempDirection, tempFlip);
                     }
+                }
+            }
+        }
+        public static void SetTileTextureEditor()
+        {
+            for (int i = 0; i < myTiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < myTiles.GetLength(1); j++)
+                {
+                    myTiles[i, j].SetTextureEditor();
                 }
             }
         }

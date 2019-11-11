@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -91,6 +87,11 @@ namespace Pacman
                     {
                         myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, tempAIType));
                         tempAIType++;
+
+                        if (tempAIType > 3)
+                        {
+                            tempAIType = 0;
+                        }
                     }
                 }
             }
