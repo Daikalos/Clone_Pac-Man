@@ -69,7 +69,7 @@ namespace Pacman
                 {
                     if (Level.GetTiles[x, y].TileType == '&')
                     {
-                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, aAIType));
+                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, 5.0f, aAIType));
                         EnemyManager.SetTexture();
                         return;
                     }
@@ -85,7 +85,13 @@ namespace Pacman
                 {
                     if (Level.GetTiles[x, y].TileType == '&')
                     {
-                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, 100.0f, tempAIType));
+                        float tempSpeed = 100.0f;
+                        if (tempAIType == 3)
+                        {
+                            tempSpeed = 60.0f;
+                        }
+
+                        myEnemies.Add(new Enemy(Level.GetTiles[x, y].Position, Level.TileSize, tempSpeed, 5.0f, tempAIType));
                         tempAIType++;
 
                         if (tempAIType > 3)

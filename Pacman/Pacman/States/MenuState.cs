@@ -22,7 +22,7 @@ namespace Pacman
         public MenuState(MainGame aGame) : base(aGame)
         {
             this.mySelection = 0;
-            this.mySelection = 3;
+            this.mySelectionAmount = 3;
         }
 
         public override void Update(GameWindow aWindow, GameTime aGameTime)
@@ -56,7 +56,7 @@ namespace Pacman
                 {
                     myGame.ChangeState(new MenuState(myGame));
                 }
-                if (KeyMouseReader.KeyPressed(Keys.Enter))
+                if (KeyMouseReader.KeyPressed(Keys.Enter) && myLevelNames.Length > 0)
                 {
                     GameInfo.CurrentLevel = myLevelNames[mySelection];
                     myGame.ChangeState(new PlayState(myGame, aWindow));

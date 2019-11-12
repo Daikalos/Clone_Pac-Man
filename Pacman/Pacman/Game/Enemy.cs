@@ -22,6 +22,7 @@ namespace Pacman
         private Color myColor;
         private BehaviourAI myBehaviour;
         private Vector2
+            mySpawnPoint,
             myDestination,
             myDirection;
 
@@ -33,7 +34,10 @@ namespace Pacman
             myAIType,
             myWalkToTile,
             myEyesDirection;
-        private float mySpeed;
+        private float 
+            mySpeed,
+            myCowardTimer,
+            myCowardDelay;
         private bool 
             mySwitchDirection,
             myIsAlive;
@@ -47,10 +51,12 @@ namespace Pacman
             get => myAIType;
         }
 
-        public Enemy(Vector2 aPosition, Point aSize, float aSpeed, int aAIType) : base(aPosition, aSize)
+        public Enemy(Vector2 aPosition, Point aSize, float aSpeed, float aCowardDelay, int aAIType) : base(aPosition, aSize)
         {
             this.mySpeed = aSpeed;
+            this.myCowardDelay = aCowardDelay;
             this.myAIType = aAIType;
+            this.mySpawnPoint = aPosition;
 
             this.myWalkingAnimation = new AnimationManager(new Point(2, 1), 0.1f, true);
             this.myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
@@ -79,10 +85,10 @@ namespace Pacman
                     IsFullRandom(aGameTime);
                     break;
                 case BehaviourAI.isCoward:
-                    IsFleeing(aGameTime, aPlayer, 1.0f); //Custom AI for fleeing type
+                    IsCoward(aGameTime, aPlayer, 7.0f);
                     break;
                 case BehaviourAI.isFleeing:
-                    IsFleeing(aGameTime, aPlayer, 5.0f);
+                    IsFleeing(aGameTime, aPlayer, 6.0f);
                     break;
             }
 
@@ -94,7 +100,7 @@ namespace Pacman
         {
             myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myPosition, myOrigin, new Point(32), new Point(32), myColor, 0.0f);
 
-            if (myBehaviour != BehaviourAI.isFleeing || (BehaviourAI)myAIType == BehaviourAI.isFleeing)
+            if (myBehaviour != BehaviourAI.isFleeing)
             {
                 if (myBehaviour != BehaviourAI.isCoward)
                 {
@@ -111,14 +117,12 @@ namespace Pacman
         {
             if (aPlayer.IsEating)
             {
-                if (myBehaviour != BehaviourAI.isFleeing && myBehaviour != BehaviourAI.isCoward)
+                if (myBehaviour != BehaviourAI.isFleeing)
                 {
                     myBehaviour = BehaviourAI.isFleeing;
-                    if ((BehaviourAI)myAIType != BehaviourAI.isCoward)
-                    {
-                        myTexture = ResourceManager.RequestTexture("Ghost_Frightened");
-                        myColor = Color.White;
-                    }
+                    myTexture = ResourceManager.RequestTexture("Ghost_Frightened");
+                    myColor = Color.White;
+
                     mySwitchDirection = true;
                 }
             }
@@ -264,6 +268,58 @@ namespace Pacman
                 mySwitchDirection = true;
             }
         }
+        private void IsCoward(GameTime aGameTime, Player aPlayer, float aDistance)
+        {
+            if (mySwitchDirection)
+            {
+                if (Vector2.Distance(aPlayer.BoundingBox.Center.ToVector2(), myBoundingBox.Center.ToVector2()) < Level.TileSize.X * aDistance)
+                {
+                    float tempXDiff = myBoundingBox.Center.X - aPlayer.BoundingBox.Center.X;
+                    float tempYDiff = myBoundingBox.Center.Y - aPlayer.BoundingBox.Center.Y;
+                    float tempDirection = (float)Math.Atan2(tempYDiff, tempXDiff);
+
+                    Vector2 tempDestination = new Vector2(
+                        myBoundingBox.Center.X + Level.TileSize.X * aDistance * (float)Math.Cos(tempDirection),
+                        myBoundingBox.Center.Y + Level.TileSize.Y * aDistance * (float)Math.Sin(tempDirection));
+
+                    myPath = Pathfinder.FindPath(myBoundingBox.Center.ToVector2(), tempDestination);
+
+                    myCowardTimer = myCowardDelay;
+                }
+                else if (myCowardTimer <= 0)
+                {
+                    myPath = Pathfinder.FindPath(myPosition, mySpawnPoint);
+                }
+
+                if (myPath.Count > 1)
+                {
+                    myWalkToTile = 1;
+                    mySwitchDirection = false;
+                }
+            }
+
+            if (myPath.Count > 1)
+            {
+                if (Vector2.Distance(myPath[myWalkToTile].GetCenter(), myBoundingBox.Center.ToVector2()) <= 1.0f)
+                {
+                    if (myWalkToTile + 1 < myPath.Count)
+                    {
+                        myWalkToTile++;
+                    }
+                    mySwitchDirection = true;
+                }
+
+                myDirection = myPath[myWalkToTile].GetCenter() - myBoundingBox.Center.ToVector2();
+                myDirection = Normalize(myDirection);
+
+                myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (myCowardTimer > 0)
+            {
+                myCowardTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }
         private void IsFleeing(GameTime aGameTime, Player aPlayer, float aDistance)
         {
             if (mySwitchDirection)
@@ -302,13 +358,10 @@ namespace Pacman
                 myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if (myBehaviour != BehaviourAI.isCoward)
+            if (Vector2.Distance(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2()) < Level.TileSize.X / 2)
             {
-                if (Vector2.Distance(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2()) < Level.TileSize.X / 2)
-                {
-                    myIsAlive = false;
-                    GameInfo.AddScore(aPlayer.BoundingBox.Center.ToVector2(), 300);
-                }
+                myIsAlive = false;
+                GameInfo.AddScore(aPlayer.BoundingBox.Center.ToVector2(), 300);
             }
         }
 

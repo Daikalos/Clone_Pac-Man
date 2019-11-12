@@ -34,6 +34,8 @@ namespace Pacman
             GameInfo.Initialize(Window, 0.5f);
             GameInfo.CurrentLevel = "Level01";
             GameInfo.FolderLevels = "../../../../Levels/";
+            GameInfo.FolderHighScores = "../../../../HighScores/";
+            GameInfo.LoadHighScore(GameInfo.FolderHighScores + "Level01_HighScores.txt");
 
             ChangeState(new MenuState(this));
 

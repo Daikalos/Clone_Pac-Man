@@ -1,0 +1,2 @@
+HighScore=10000
+HighScore=20000

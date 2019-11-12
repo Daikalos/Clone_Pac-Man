@@ -12,7 +12,8 @@ namespace Pacman
         private static Vector2 myDrawPos;
         private static string 
             myCurrentLevel,
-            myFolderLevels;
+            myFolderLevels,
+            myFolderHighScores;
         private static int[] myHighScores;
         private static int
             myScore,
@@ -34,6 +35,11 @@ namespace Pacman
         {
             get => myFolderLevels;
             set => myFolderLevels = value;
+        }
+        public static string FolderHighScores
+        {
+            get => myFolderHighScores;
+            set => myFolderHighScores = value;
         }
         public static int[] HighScores
         {

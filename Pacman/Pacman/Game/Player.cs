@@ -23,7 +23,9 @@ namespace Pacman
         /// <summary>
         /// 0 = Up; 1 = Left; 2 = Down; 3 = Right;
         /// </summary>
-        private int myAngle;
+        private int 
+            myAngle,
+            myLives;
         private float 
             mySpeed,
             myRotation,
@@ -38,15 +40,21 @@ namespace Pacman
         {
             get => myBoundingBox;
         }
+        public int Lives
+        {
+            get => myLives;
+            set => myLives = value;
+        }
         public bool IsEating
         {
             get => myIsEating;
         }
 
-        public Player(Vector2 aPosition, Point aSize, float aSpeed, float aEatingDelay) : base(aPosition, aSize)
+        public Player(Vector2 aPosition, Point aSize, float aSpeed, float aEatingDelay, int someLives) : base(aPosition, aSize)
         {
             this.mySpeed = aSpeed;
             this.myEatingDelay = aEatingDelay;
+            this.myLives = someLives;
 
             this.myWalkingAnimation = new AnimationManager(new Point(4, 1), 0.1f, true);
             this.myPlayerState = PlayerState.isWalking;

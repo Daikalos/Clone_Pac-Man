@@ -13,7 +13,7 @@ namespace Pacman
             mySnack,
             myPowerUp,
             myGhost;
-        SpriteFont my8bitFont;
+        private SpriteFont my8bitFont;
         private string[] myLevelNames;
         private int 
             mySelection,
@@ -42,6 +42,7 @@ namespace Pacman
                             myLoadLevel = true;
                             myLevelNames = FileReader.FindFileNames("../../../../Levels/");
                             mySelectionAmount = myLevelNames.Length - 1;
+                            mySelection = 0;
                             break;
                         case 6:
                             SaveLevel();
@@ -155,7 +156,7 @@ namespace Pacman
                 myLoadLevel = false;
                 mySelectionAmount = 6;
             }
-            if (KeyMouseReader.KeyPressed(Keys.Enter))
+            if (KeyMouseReader.KeyPressed(Keys.Enter) && myLevelNames.Length > 0)
             {
                 GameInfo.CurrentLevel = myLevelNames[mySelection];
                 Level.LoadLevel(Level.TileSize);
