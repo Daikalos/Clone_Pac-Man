@@ -12,6 +12,7 @@ namespace Pacman
             isChasing,
             isRandom,
             isFullRandom,
+            isCoward,
             isFleeing,
         }
 
@@ -77,15 +78,11 @@ namespace Pacman
                 case BehaviourAI.isFullRandom:
                     IsFullRandom(aGameTime);
                     break;
+                case BehaviourAI.isCoward:
+                    IsFleeing(aGameTime, aPlayer, 1.0f); //Custom AI for fleeing type
+                    break;
                 case BehaviourAI.isFleeing:
-                    if ((BehaviourAI)myAIType != BehaviourAI.isFleeing)
-                    {
-                        IsFleeing(aGameTime, aPlayer, 5.0f);
-                    }
-                    else
-                    {
-                        IsFleeing(aGameTime, aPlayer, 1.0f); //Custom AI for fleeing type
-                    }
+                    IsFleeing(aGameTime, aPlayer, 5.0f);
                     break;
             }
 
@@ -99,7 +96,7 @@ namespace Pacman
 
             if (myBehaviour != BehaviourAI.isFleeing || (BehaviourAI)myAIType == BehaviourAI.isFleeing)
             {
-                if ((BehaviourAI)myAIType != BehaviourAI.isFleeing)
+                if (myBehaviour != BehaviourAI.isCoward)
                 {
                     aSpriteBatch.Draw(myEyesTexture, myPosition, new Rectangle((myEyesTexture.Width / 4) * myEyesDirection, 0, myEyesTexture.Width / 4, myEyesTexture.Height), Color.White);
                 }
@@ -114,10 +111,10 @@ namespace Pacman
         {
             if (aPlayer.IsEating)
             {
-                if (myBehaviour != BehaviourAI.isFleeing)
+                if (myBehaviour != BehaviourAI.isFleeing && myBehaviour != BehaviourAI.isCoward)
                 {
                     myBehaviour = BehaviourAI.isFleeing;
-                    if ((BehaviourAI)myAIType != BehaviourAI.isFleeing)
+                    if ((BehaviourAI)myAIType != BehaviourAI.isCoward)
                     {
                         myTexture = ResourceManager.RequestTexture("Ghost_Frightened");
                         myColor = Color.White;
@@ -305,7 +302,7 @@ namespace Pacman
                 myPosition += myDirection * mySpeed * (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if ((BehaviourAI)myAIType != BehaviourAI.isFleeing)
+            if (myBehaviour != BehaviourAI.isCoward)
             {
                 if (Vector2.Distance(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2()) < Level.TileSize.X / 2)
                 {

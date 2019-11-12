@@ -12,7 +12,7 @@ namespace Pacman
             List<Tile> tempVisited = new List<Tile>();
             Queue<Tile> tempWork = new Queue<Tile>();
 
-            Tile tempStart = Level.GetClosestTile(aStart);
+            Tile tempStart = Level.GetTileAtPos(aStart).Item1;
             Tile tempGoal = Level.GetClosestTile(aGoal);
 
             tempStart.History = new List<Tile>();
