@@ -55,6 +55,7 @@ namespace Pacman
             ResourceManager.AddTexture("Snack", this.Content.Load<Texture2D>("Sprites/Tileset/snack"));
             ResourceManager.AddTexture("PowerUp_00", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
+            ResourceManager.AddTexture("Fruits", this.Content.Load<Texture2D>("Sprites/Tileset/fruits"));
             ResourceManager.AddTexture("Tile_Ghost", this.Content.Load<Texture2D>("Sprites/Tileset/tile_ghost"));
             ResourceManager.AddTexture("Black_Rect", this.Content.Load<Texture2D>("Sprites/blackRect"));
             ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
@@ -64,6 +65,7 @@ namespace Pacman
             ResourceManager.AddTexture("Ghost-Eyes_Frightened", this.Content.Load<Texture2D>("Sprites/ghost-eyes_frightened"));
 
             GameInfo.SetRectTexture("Black_Rect");
+            GameInfo.SetPacManTexture("Pacman_Walking");
 
             myGameState.LoadContent();
         }

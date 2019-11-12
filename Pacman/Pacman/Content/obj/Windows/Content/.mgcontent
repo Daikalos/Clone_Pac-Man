@@ -12,6 +12,7 @@
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/ghost-eyes_frightened.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/empty.png</File>
+    <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/fruits.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/powerup_00.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/snack.png</File>
     <File>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/Tileset/tile_block-0.png</File>
@@ -22,6 +23,7 @@
   </SourceFiles>
   <DestFiles>
     <File>Fonts/8bit.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

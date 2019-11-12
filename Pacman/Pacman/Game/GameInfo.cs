@@ -8,7 +8,9 @@ namespace Pacman
 {
     static class GameInfo
     {
-        private static Texture2D myRect; //Blacks out right side of screen
+        private static Texture2D 
+            myRect, //Blacks out right side of screen
+            myPacMan; //Draw lives
         private static Vector2 myDrawPos;
         private static string 
             myCurrentLevel,
@@ -83,12 +85,19 @@ namespace Pacman
             }
         }
 
-        public static void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, SpriteFont aFont)
+        public static void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, SpriteFont aFont, Player aPlayer)
         {
             aSpriteBatch.Draw(myRect, new Rectangle(Level.MapSize.X, 0, aWindow.ClientBounds.Width - Level.MapSize.X, aWindow.ClientBounds.Height), null, Color.Black);
 
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 16), Color.Yellow, 0.7f);
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 48), Color.Yellow, 0.6f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 20), Color.DarkOrange, 0.7f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 52), Color.Yellow, 0.6f);
+
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Lives", new Vector2(Level.MapSize.X + 12, 100), Color.DarkOrange, 0.7f);
+            for (int i = 0; i < aPlayer.Lives; i++)
+            {
+                aSpriteBatch.Draw(myPacMan, new Vector2(Level.MapSize.X + 24 + (i * 32), 122), 
+                    new Rectangle(myPacMan.Width / 4, 0, myPacMan.Width / 4, myPacMan.Height), Color.White);
+            }
 
             if (myDSTimer >= 0)
             {
@@ -107,6 +116,11 @@ namespace Pacman
         public static void SetRectTexture(string aName)
         {
             myRect = ResourceManager.RequestTexture(aName);
+        }
+
+        public static void SetPacManTexture(string aName)
+        {
+            myPacMan = ResourceManager.RequestTexture(aName);
         }
     }
 }

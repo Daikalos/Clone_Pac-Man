@@ -11,6 +11,7 @@ namespace Pacman
         private Texture2D
             myBlock,
             mySnack,
+            myFruit,
             myPowerUp,
             myGhost;
         private SpriteFont my8bitFont;
@@ -24,7 +25,7 @@ namespace Pacman
         {
             GameInfo.CurrentLevel = "Level_Template.txt";
             Level.LoadLevel(new Point(32));
-            mySelectionAmount = 6;
+            mySelectionAmount = 7;
             aGame.IsMouseVisible = true;
         }
 
@@ -38,13 +39,13 @@ namespace Pacman
                 {
                     switch (mySelection)
                     {
-                        case 5:
+                        case 6:
                             myLoadLevel = true;
                             myLevelNames = FileReader.FindFileNames("../../../../Levels/");
                             mySelectionAmount = myLevelNames.Length - 1;
                             mySelection = 0;
                             break;
-                        case 6:
+                        case 7:
                             SaveLevel();
                             break;
                     }
@@ -92,13 +93,15 @@ namespace Pacman
                     new Vector2(myBlock.Width / 2, myBlock.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
                 aSpriteBatch.Draw(mySnack, new Vector2(Level.MapSize.X + 50, 110), null, Color.White, 0.0f,
                     new Vector2(mySnack.Width / 2, mySnack.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(myPowerUp, new Vector2(Level.MapSize.X + 50, 190), null, Color.White, 0.0f,
+                aSpriteBatch.Draw(myFruit, new Vector2(Level.MapSize.X + 50, 150), new Rectangle(0, 0, myFruit.Width / 5, myFruit.Height), Color.White, 0.0f,
+                    new Vector2(myFruit.Width / 10, myFruit.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+                aSpriteBatch.Draw(myPowerUp, new Vector2(Level.MapSize.X + 50, 230), null, Color.White, 0.0f,
                     new Vector2(myPowerUp.Width / 2, myPowerUp.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(myGhost, new Vector2(Level.MapSize.X + 50, 230), new Rectangle(0, 0, myGhost.Width / 2, myGhost.Height), Color.White, 0.0f,
+                aSpriteBatch.Draw(myGhost, new Vector2(Level.MapSize.X + 50, 270), new Rectangle(0, 0, myGhost.Width / 2, myGhost.Height), Color.White, 0.0f,
                     new Vector2(myGhost.Width / 4, myGhost.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
 
-                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 40, 270), Color.White, 1.0f);
-                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 40, 310), Color.White, 1.0f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 40, 310), Color.White, 1.0f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 40, 350), Color.White, 1.0f);
 
                 StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "Press return to go back to menu", new Vector2(16, aWindow.ClientBounds.Height - 16), Color.DarkOrange * 0.5f, 0.5f);
             }
@@ -182,12 +185,15 @@ namespace Pacman
                             mySelectedTile.Item1.TileType = '.';
                             break;
                         case 2:
-                            mySelectedTile.Item1.TileType = '%';
+                            mySelectedTile.Item1.TileType = '^';
                             break;
                         case 3:
-                            mySelectedTile.Item1.TileType = '/';
+                            mySelectedTile.Item1.TileType = '%';
                             break;
                         case 4:
+                            mySelectedTile.Item1.TileType = '/';
+                            break;
+                        case 5:
                             mySelectedTile.Item1.TileType = '&';
                             break;
                     }
@@ -209,6 +215,7 @@ namespace Pacman
 
             myBlock = ResourceManager.RequestTexture("Tile_Block-0");
             mySnack = ResourceManager.RequestTexture("Snack");
+            myFruit = ResourceManager.RequestTexture("Fruits");
             myPowerUp = ResourceManager.RequestTexture("PowerUp_00");
             myGhost = ResourceManager.RequestTexture("Ghost");
         }

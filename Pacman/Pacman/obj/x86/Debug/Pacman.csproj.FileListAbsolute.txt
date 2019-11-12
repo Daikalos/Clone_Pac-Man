@@ -78,3 +78,4 @@ C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Conte
 C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\ghost_frightened.xnb
 C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_ghost.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\tile_ghost.xnb
+C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\fruits.xnb

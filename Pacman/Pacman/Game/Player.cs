@@ -272,6 +272,7 @@ namespace Pacman
         private void CollisionCheck()
         {
             CollisionSnack();
+            CollisionFruit();
             CollisionPowerUp();
         }
         private void CollisionSnack()
@@ -279,7 +280,18 @@ namespace Pacman
             Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1;
             if (tempTile.TileType == '.')
             {
-                GameInfo.AddScore(myBoundingBox.Center.ToVector2(), 100);
+                GameInfo.AddScore(myBoundingBox.Center.ToVector2(), 10);
+
+                tempTile.TileType = '-';
+                tempTile.SetTexture();
+            }
+        }
+        private void CollisionFruit()
+        {
+            Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1;
+            if (tempTile.TileType == '^')
+            {
+                GameInfo.AddScore(myBoundingBox.Center.ToVector2(), 300);
 
                 tempTile.TileType = '-';
                 tempTile.SetTexture();

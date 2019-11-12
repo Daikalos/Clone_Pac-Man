@@ -64,7 +64,7 @@ namespace Pacman
                 Level.DrawTiles(aSpriteBatch);
                 myPlayer.Draw(aSpriteBatch, aGameTime);
                 EnemyManager.Draw(aSpriteBatch, aGameTime);
-                GameInfo.Draw(aSpriteBatch, aWindow, my8bitFont);
+                GameInfo.Draw(aSpriteBatch, aWindow, my8bitFont, myPlayer);
             }
             else
             {

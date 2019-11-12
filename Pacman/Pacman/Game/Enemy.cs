@@ -88,7 +88,7 @@ namespace Pacman
                     IsCoward(aGameTime, aPlayer, 7.0f);
                     break;
                 case BehaviourAI.isFleeing:
-                    IsFleeing(aGameTime, aPlayer, 6.0f);
+                    IsFleeing(aGameTime, aPlayer, 10.0f);
                     break;
             }
 

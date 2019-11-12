@@ -8,6 +8,7 @@ namespace Pacman
     {
         private List<Tile> myHistory; //Used for pathfinding
 
+        private Rectangle mySourceRect;
         private char myTileType;
         private float myRotation;
         private int myTileForm;
@@ -101,7 +102,7 @@ namespace Pacman
             if (myTexture != null)
             {
                 aSpriteBatch.Draw(myTexture, myBoundingBox,
-                    null, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+                    mySourceRect, Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
             }
         }
 
@@ -121,9 +122,17 @@ namespace Pacman
                 case '/':
                     myTexture = ResourceManager.RequestTexture("PowerUp_00");
                     break;
+                case '^':
+                    myTexture = ResourceManager.RequestTexture("Fruits");
+                    mySourceRect = new Rectangle((myTexture.Width / 5) * StaticRandom.RandomNumber(0, 5), 0, myTexture.Width / 5, myTexture.Height);
+                    break;
                 case '%':
                     myTexture = null;
                     break;
+            }
+            if (myTexture != null && myTileType != '^')
+            {
+                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             }
         }
 
@@ -146,9 +155,17 @@ namespace Pacman
                 case '&':
                     myTexture = ResourceManager.RequestTexture("Tile_Ghost");
                     break;
+                case '^':
+                    myTexture = ResourceManager.RequestTexture("Fruits");
+                    mySourceRect = new Rectangle((myTexture.Width / 5) * StaticRandom.RandomNumber(0, 5), 0, myTexture.Width / 5, myTexture.Height);
+                    break;
                 case '%':
                     myTexture = null;
                     break;
+            }
+            if (myTexture != null && myTileType != '^')
+            {
+                mySourceRect = new Rectangle(0, 0, myTexture.Width, myTexture.Height);
             }
         }
     }
