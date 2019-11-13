@@ -93,7 +93,7 @@ namespace Pacman
                     Movement(aGameTime);
                     OutsideBounds();
 
-                    if (myLives <= 0 || KeyMouseReader.KeyPressed(Keys.Enter))
+                    if (myLives <= 0)
                     {
                         myPlayerState = PlayerState.isDead;
                         myTexture = ResourceManager.RequestTexture("Pacman_Death");
