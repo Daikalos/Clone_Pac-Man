@@ -109,6 +109,7 @@ namespace Pacman
 
             Invincibility(aGameTime);
             Eating(aGameTime);
+
             CollisionCheck();
         }
 
@@ -309,7 +310,7 @@ namespace Pacman
             if (myInvincibilityTimer > 0)
             {
                 myInvincibilityTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
-                myColor = Color.BlueViolet;
+                myColor = Color.LightBlue;
             }
             else
             {

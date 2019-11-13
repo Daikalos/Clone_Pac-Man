@@ -15,6 +15,12 @@ namespace Pacman
             Level.LoadLevel(new Point(32));
             aGame.IsMouseVisible = false;
 
+            string tempName = GameInfo.CurrentLevel;
+            tempName = tempName.Replace(".txt", "");
+
+            GameInfo.Score = 0;
+            GameInfo.LoadHighScore(GameInfo.FolderHighScores + tempName + "_HighScores.txt");
+
             EnemyManager.Initialize(10.0f);
             EnemyManager.AddEnemies();
 
@@ -33,6 +39,11 @@ namespace Pacman
 
                 if (Level.CheckIfWon())
                 {
+                    string tempName = GameInfo.CurrentLevel;
+                    tempName = tempName.Replace(".txt", "");
+
+                    GameInfo.SaveHighScore(GameInfo.FolderHighScores + tempName + "_HighScores.txt");
+
                     myGame.ChangeState(new WinState(myGame));
                 }
                 if (myPlayer.IsDead)

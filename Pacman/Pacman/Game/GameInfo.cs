@@ -50,6 +50,7 @@ namespace Pacman
         public static int Score
         {
             get => myScore;
+            set => myScore = value;
         }
         public static int HighScore
         {
@@ -69,12 +70,28 @@ namespace Pacman
         {
             string[] tempScores = FileReader.FindInfo(aPath, "HighScore", '=');
             myHighScores = Array.ConvertAll(tempScores, s => Int32.Parse(s));
+
+            if (myHighScores.Length == 0)
+            {
+                myHighScores = new int[] { 0 };
+            }
+
             Array.Sort(myHighScores);
             Array.Reverse(myHighScores);
         }
         public static void SaveHighScore(string aPath)
         {
-            File.AppendAllText(aPath, Environment.NewLine + "HighScore=" + myScore.ToString());
+            if (myHighScores.Length > 0)
+            {
+                if (myHighScores[0] != 0)
+                {
+                    File.AppendAllText(aPath, Environment.NewLine + "HighScore=" + myScore.ToString());
+                }
+                else
+                {
+                    File.AppendAllText(aPath, "HighScore=" + myScore.ToString());
+                }
+            }
         }
 
         public static void Update(GameTime aGameTime)
