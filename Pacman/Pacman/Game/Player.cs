@@ -12,13 +12,16 @@ namespace Pacman
             isDead
         }
 
-        private AnimationManager myWalkingAnimation;
+        private AnimationManager 
+            myWalkingAnimation,
+            myDeathAnimation;
 
         private Rectangle myDrawBox;
         private Vector2
             myDestination,
             myDirection;
         private PlayerState myPlayerState;
+        private Color myColor;
 
         /// <summary>
         /// 0 = Up; 1 = Left; 2 = Down; 3 = Right;
@@ -30,11 +33,15 @@ namespace Pacman
             mySpeed,
             myRotation,
             myEatingTimer,
-            myEatingDelay;
+            myEatingDelay,
+            myInvincibilityTimer,
+            myInvincibilityDelay;
         private bool 
             mySwitchAngle,
             myIsMoving,
-            myIsEating;
+            myIsEatingGhosts,
+            myIsEatingWalls,
+            myIsDead;
 
         public Rectangle BoundingBox
         {
@@ -45,20 +52,34 @@ namespace Pacman
             get => myLives;
             set => myLives = value;
         }
-        public bool IsEating
+        public float InvincibilityTimer
         {
-            get => myIsEating;
+            get => myInvincibilityTimer;
+            set => myInvincibilityTimer = myInvincibilityDelay;
+        }
+        public bool IsDead
+        {
+            get => myIsDead;
+        }
+        public bool IsEatingGhosts
+        {
+            get => myIsEatingGhosts;
         }
 
-        public Player(Vector2 aPosition, Point aSize, float aSpeed, float aEatingDelay, int someLives) : base(aPosition, aSize)
+        public Player(Vector2 aPosition, Point aSize, float aSpeed, float aEatingDelay, float aInvincibilityDelay, int someLives) : base(aPosition, aSize)
         {
             this.mySpeed = aSpeed;
             this.myEatingDelay = aEatingDelay;
+            this.myInvincibilityDelay = aInvincibilityDelay;
             this.myLives = someLives;
 
             this.myWalkingAnimation = new AnimationManager(new Point(4, 1), 0.1f, true);
+            this.myDeathAnimation = new AnimationManager(new Point(5, 3), 0.2f, false);
+            this.myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
+            this.myDestination = myBoundingBox.Center.ToVector2();
             this.myPlayerState = PlayerState.isWalking;
             this.myOrigin = Vector2.Zero;
+            this.myAngle = -1;
         }
 
         public void Update(GameTime aGameTime)
@@ -66,26 +87,28 @@ namespace Pacman
             myBoundingBox = new Rectangle((int)myPosition.X, (int)myPosition.Y, mySize.X, mySize.Y);
             myDrawBox = new Rectangle((int)myPosition.X + (int)myOrigin.X, (int)myPosition.Y + (int)myOrigin.Y, mySize.X, mySize.Y);
 
-            switch(myPlayerState)
+            switch (myPlayerState)
             {
                 case PlayerState.isWalking:
                     Movement(aGameTime);
                     OutsideBounds();
+
+                    if (myLives <= 0 || KeyMouseReader.KeyPressed(Keys.Enter))
+                    {
+                        myPlayerState = PlayerState.isDead;
+                        myTexture = ResourceManager.RequestTexture("Pacman_Death");
+                    }
                     break;
                 case PlayerState.isDead:
-
+                    if (myDeathAnimation.IsFinished)
+                    {
+                        myIsDead = true;
+                    }
                     break;
             }
 
-            if (myEatingTimer > 0)
-            {
-                myEatingTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else
-            {
-                myIsEating = false;
-            }
-
+            Invincibility(aGameTime);
+            Eating(aGameTime);
             CollisionCheck();
         }
 
@@ -96,15 +119,15 @@ namespace Pacman
                 case PlayerState.isWalking:
                     if (myIsMoving)
                     {
-                        myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myDrawBox.Location.ToVector2(), myOrigin, new Point(32), mySize, Color.White, myRotation);
+                        myWalkingAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myDrawBox.Location.ToVector2(), myOrigin, new Point(32), mySize, myColor, myRotation);
                     }
                     else
                     {
-                        aSpriteBatch.Draw(myTexture, myDrawBox, new Rectangle(myTexture.Width / 4, 0, myTexture.Width / 4, myTexture.Height), Color.White, myRotation, myOrigin, SpriteEffects.None, 0.0f);
+                        aSpriteBatch.Draw(myTexture, myDrawBox, new Rectangle(myTexture.Width / 4, 0, myTexture.Width / 4, myTexture.Height), myColor, myRotation, myOrigin, SpriteEffects.None, 0.0f);
                     }
                     break;
                 case PlayerState.isDead:
-
+                    myDeathAnimation.DrawSpriteSheet(aSpriteBatch, aGameTime, myTexture, myDrawBox.Location.ToVector2(), myOrigin, new Point(32), mySize, Color.White, myRotation);
                     break;
             }
         }
@@ -269,11 +292,39 @@ namespace Pacman
             return new Vector2();
         }
 
+        private void Eating(GameTime aGameTime)
+        {
+            if (myEatingTimer > 0)
+            {
+                myEatingTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                myIsEatingGhosts = false;
+            }
+        }
+
+        private void Invincibility(GameTime aGameTime)
+        {
+            if (myInvincibilityTimer > 0)
+            {
+                myInvincibilityTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+                myColor = Color.BlueViolet;
+            }
+            else
+            {
+                myInvincibilityTimer = 0;
+                myColor = Color.White;
+            }
+        }
         private void CollisionCheck()
         {
-            CollisionSnack();
-            CollisionFruit();
-            CollisionPowerUp();
+            if (myInvincibilityTimer <= 0)
+            {
+                CollisionSnack();
+                CollisionFruit();
+                CollisionPowerUp();
+            }
         }
         private void CollisionSnack()
         {
@@ -302,7 +353,7 @@ namespace Pacman
             Tile tempTile = Level.GetTileAtPos(myBoundingBox.Center.ToVector2()).Item1;
             if (tempTile.TileType == '/')
             {
-                myIsEating = true;
+                myIsEatingGhosts = true;
                 myEatingTimer = myEatingDelay;
 
                 tempTile.TileType = '-';

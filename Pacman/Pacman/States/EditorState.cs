@@ -198,7 +198,6 @@ namespace Pacman
                             break;
                     }
                 }
-
                 if (KeyMouseReader.RightHold())
                 {
                     mySelectedTile.Item1.TileType = '-';
@@ -209,7 +208,7 @@ namespace Pacman
 
         public override void LoadContent()
         {
-            Level.SetTileTexture();
+            Level.SetTileTextureEditor();
 
             my8bitFont = ResourceManager.RequestFont("8-bit");
 

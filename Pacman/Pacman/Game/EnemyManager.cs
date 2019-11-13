@@ -26,7 +26,7 @@ namespace Pacman
         {
             for (int i = 0; i < myRespawnTimer.Length; i++)
             {
-                if (myRespawnEnemy[i] && !aPlayer.IsEating)
+                if (myRespawnEnemy[i] && !aPlayer.IsEatingGhosts)
                 {
                     if (myRespawnTimer[i] > 0)
                     {
@@ -110,6 +110,7 @@ namespace Pacman
         {
             myEnemies.RemoveAll(x => x.IsAlive);
         }
+
         public static void SetTexture()
         {
             for (int i = 0; i < myEnemies.Count; i++)

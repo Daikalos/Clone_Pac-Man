@@ -18,7 +18,7 @@ namespace Pacman
             EnemyManager.Initialize(10.0f);
             EnemyManager.AddEnemies();
 
-            this.myPlayer = new Player(new Vector2(Level.TileSize.X * 12, aWindow.ClientBounds.Height - Level.TileSize.Y * 2), Level.TileSize, 140.0f, 9.0f, 3);
+            this.myPlayer = new Player(new Vector2(Level.TileSize.X * 12, aWindow.ClientBounds.Height - Level.TileSize.Y * 2), Level.TileSize, 140.0f, 9.0f, 4.0f, 3);
             this.myIsPaused = false;
         }
 
@@ -30,6 +30,15 @@ namespace Pacman
                 myPlayer.Update(aGameTime);
                 EnemyManager.Update(aGameTime, myPlayer);
                 GameInfo.Update(aGameTime);
+
+                if (Level.CheckIfWon())
+                {
+                    myGame.ChangeState(new WinState(myGame));
+                }
+                if (myPlayer.IsDead)
+                {
+                    myGame.ChangeState(new DeadState(myGame));
+                }
             }
             else
             {
@@ -37,11 +46,6 @@ namespace Pacman
                 {
                     myGame.ChangeState(new MenuState(myGame));
                 }
-            }
-
-            if (Level.CheckIfWon())
-            {
-                myGame.ChangeState(new WinState(myGame));
             }
 
             if (KeyMouseReader.KeyPressed(Keys.Escape))

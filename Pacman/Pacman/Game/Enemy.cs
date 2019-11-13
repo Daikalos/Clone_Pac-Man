@@ -88,8 +88,13 @@ namespace Pacman
                     IsCoward(aGameTime, aPlayer, 7.0f);
                     break;
                 case BehaviourAI.isFleeing:
-                    IsFleeing(aGameTime, aPlayer, 10.0f);
+                    IsFleeing(aGameTime, aPlayer, 11.0f);
                     break;
+            }
+
+            if (myBehaviour != BehaviourAI.isFleeing)
+            {
+                CollisionPlayer(aPlayer);
             }
 
             FleeingCheck(aPlayer);
@@ -115,7 +120,7 @@ namespace Pacman
 
         private void FleeingCheck(Player aPlayer)
         {
-            if (aPlayer.IsEating)
+            if (aPlayer.IsEatingGhosts)
             {
                 if (myBehaviour != BehaviourAI.isFleeing)
                 {
@@ -365,6 +370,17 @@ namespace Pacman
             }
         }
 
+        private void CollisionPlayer(Player aPlayer)
+        {
+            if (aPlayer.InvincibilityTimer <= 0)
+            {
+                if (Vector2.Distance(myBoundingBox.Center.ToVector2(), aPlayer.BoundingBox.Center.ToVector2()) < Level.TileSize.X / 2)
+                {
+                    aPlayer.Lives--;
+                    aPlayer.InvincibilityTimer = 0; //Sets auto as the specified delay in using property
+                }
+            }
+        }
         private void MoveTo(Vector2 aPosition)
         {
             Vector2 tempDirection = new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y);

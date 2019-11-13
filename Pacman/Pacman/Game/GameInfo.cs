@@ -89,13 +89,16 @@ namespace Pacman
         {
             aSpriteBatch.Draw(myRect, new Rectangle(Level.MapSize.X, 0, aWindow.ClientBounds.Width - Level.MapSize.X, aWindow.ClientBounds.Height), null, Color.Black);
 
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 20), Color.DarkOrange, 0.7f);
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 52), Color.Yellow, 0.6f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Score", new Vector2(Level.MapSize.X + 12, 20), Color.DarkOrange, 0.6f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, myScore.ToString(), new Vector2(Level.MapSize.X + 24, 52), Color.Yellow, 0.5f);
 
-            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Lives", new Vector2(Level.MapSize.X + 12, 100), Color.DarkOrange, 0.7f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "HighScore", new Vector2(Level.MapSize.X + 12, 100), Color.DarkOrange, 0.6f);
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, HighScore.ToString(), new Vector2(Level.MapSize.X + 24, 132), Color.Yellow, 0.5f);
+
+            StringManager.DrawStringLeft(aSpriteBatch, aFont, "Lives", new Vector2(Level.MapSize.X + 12, 180), Color.DarkOrange, 0.6f);
             for (int i = 0; i < aPlayer.Lives; i++)
             {
-                aSpriteBatch.Draw(myPacMan, new Vector2(Level.MapSize.X + 24 + (i * 32), 122), 
+                aSpriteBatch.Draw(myPacMan, new Vector2(Level.MapSize.X + 24 + (i * 32), 200), 
                     new Rectangle(myPacMan.Width / 4, 0, myPacMan.Width / 4, myPacMan.Height), Color.White);
             }
 

@@ -83,6 +83,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/ghost-eyes_frightened.png
 
+#begin Sprites/pacman_death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/pacman_death.png
+
 #begin Sprites/pacman_walking.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -107,6 +119,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tileset/empty.png
 
+#begin Sprites/Tileset/empty_editor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/empty_editor.png
+
 #begin Sprites/Tileset/fruits.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -118,6 +142,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Tileset/fruits.png
+
+#begin Sprites/Tileset/fruits_editor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/fruits_editor.png
 
 #begin Sprites/Tileset/powerup_00.png
 /importer:TextureImporter
@@ -131,6 +167,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tileset/powerup_00.png
 
+#begin Sprites/Tileset/powerup_00_editor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/powerup_00_editor.png
+
 #begin Sprites/Tileset/snack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -142,6 +190,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Tileset/snack.png
+
+#begin Sprites/Tileset/snack_editor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/snack_editor.png
 
 #begin Sprites/Tileset/tile_block-0.png
 /importer:TextureImporter

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Pacman.States
+namespace Pacman
 {
     class DeadState : State
     {
@@ -25,7 +25,7 @@ namespace Pacman.States
 
         public override void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, GameTime aGameTime)
         {
-            
+            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "Press return to go back to menu", new Vector2(12, aWindow.ClientBounds.Height - 12), Color.DarkOrange, 0.5f);
         }
 
         public override void LoadContent()

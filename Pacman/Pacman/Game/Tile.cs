@@ -141,22 +141,22 @@ namespace Pacman
             switch (myTileType)
             {
                 case '-':
-                    myTexture = ResourceManager.RequestTexture("Empty");
+                    myTexture = ResourceManager.RequestTexture("Empty_Editor");
                     break;
                 case '#':
                     myTexture = ResourceManager.RequestTexture("Tile_Block-" + myTileForm.ToString());
                     break;
                 case '.':
-                    myTexture = ResourceManager.RequestTexture("Snack");
+                    myTexture = ResourceManager.RequestTexture("Snack_Editor");
                     break;
                 case '/':
-                    myTexture = ResourceManager.RequestTexture("PowerUp_00");
+                    myTexture = ResourceManager.RequestTexture("PowerUp_00_Editor");
                     break;
                 case '&':
                     myTexture = ResourceManager.RequestTexture("Tile_Ghost");
                     break;
                 case '^':
-                    myTexture = ResourceManager.RequestTexture("Fruits");
+                    myTexture = ResourceManager.RequestTexture("Fruits_Editor");
                     mySourceRect = new Rectangle((myTexture.Width / 5) * StaticRandom.RandomNumber(0, 5), 0, myTexture.Width / 5, myTexture.Height);
                     break;
                 case '%':

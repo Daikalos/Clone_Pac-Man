@@ -53,12 +53,17 @@ namespace Pacman
             ResourceManager.AddTexture("Tile_Block-2", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-2"));
             ResourceManager.AddTexture("Tile_Block-3", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-3"));
             ResourceManager.AddTexture("Snack", this.Content.Load<Texture2D>("Sprites/Tileset/snack"));
+            ResourceManager.AddTexture("Snack_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/snack_editor"));
             ResourceManager.AddTexture("PowerUp_00", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00"));
+            ResourceManager.AddTexture("PowerUp_00_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00_editor"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
+            ResourceManager.AddTexture("Empty_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/empty_editor"));
             ResourceManager.AddTexture("Fruits", this.Content.Load<Texture2D>("Sprites/Tileset/fruits"));
+            ResourceManager.AddTexture("Fruits_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/fruits_editor"));
             ResourceManager.AddTexture("Tile_Ghost", this.Content.Load<Texture2D>("Sprites/Tileset/tile_ghost"));
             ResourceManager.AddTexture("Black_Rect", this.Content.Load<Texture2D>("Sprites/blackRect"));
             ResourceManager.AddTexture("Pacman_Walking", this.Content.Load<Texture2D>("Sprites/pacman_walking"));
+            ResourceManager.AddTexture("Pacman_Death", this.Content.Load<Texture2D>("Sprites/pacman_death"));
             ResourceManager.AddTexture("Ghost", this.Content.Load<Texture2D>("Sprites/ghost"));
             ResourceManager.AddTexture("Ghost_Frightened", this.Content.Load<Texture2D>("Sprites/ghost_frightened"));
             ResourceManager.AddTexture("Ghost-Eyes", this.Content.Load<Texture2D>("Sprites/ghost-eyes"));
