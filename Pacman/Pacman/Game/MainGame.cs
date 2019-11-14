@@ -46,7 +46,7 @@ namespace Pacman
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ResourceManager.AddFont("8-bit", this.Content.Load<SpriteFont>("Fonts/8bit")); 
+            ResourceManager.AddFont("8-bit", this.Content.Load<SpriteFont>("Fonts/8bit"));
 
             ResourceManager.AddTexture("Tile_Block-0", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-0"));
             ResourceManager.AddTexture("Tile_Block-1", this.Content.Load<Texture2D>("Sprites/Tileset/tile_block-1"));
@@ -56,6 +56,8 @@ namespace Pacman
             ResourceManager.AddTexture("Snack_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/snack_editor"));
             ResourceManager.AddTexture("PowerUp_00", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00"));
             ResourceManager.AddTexture("PowerUp_00_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_00_editor"));
+            ResourceManager.AddTexture("PowerUp_01", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_01"));
+            ResourceManager.AddTexture("PowerUp_01_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/powerup_01_editor"));
             ResourceManager.AddTexture("Empty", this.Content.Load<Texture2D>("Sprites/Tileset/empty"));
             ResourceManager.AddTexture("Empty_Editor", this.Content.Load<Texture2D>("Sprites/Tileset/empty_editor"));
             ResourceManager.AddTexture("Fruits", this.Content.Load<Texture2D>("Sprites/Tileset/fruits"));
@@ -70,7 +72,7 @@ namespace Pacman
             ResourceManager.AddTexture("Ghost-Eyes_Frightened", this.Content.Load<Texture2D>("Sprites/ghost-eyes_frightened"));
 
             GameInfo.SetRectTexture("Black_Rect");
-            GameInfo.SetPacManTexture("Pacman_Walking");
+            GameInfo.SetPacManTexture("Pacman_Walking"); //Health Texture
 
             myGameState.LoadContent();
         }

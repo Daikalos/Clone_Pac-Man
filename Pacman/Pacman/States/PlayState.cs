@@ -24,7 +24,7 @@ namespace Pacman
             EnemyManager.Initialize(10.0f);
             EnemyManager.AddEnemies();
 
-            this.myPlayer = new Player(new Vector2(Level.TileSize.X * 12, aWindow.ClientBounds.Height - Level.TileSize.Y * 2), Level.TileSize, 140.0f, 9.0f, 4.0f, 3);
+            this.myPlayer = new Player(Level.GetClosestTile(new Vector2(Level.MapSize.X / 2, aWindow.ClientBounds.Height - Level.TileSize.Y * 6)).Position, Level.TileSize, 140.0f, 9.0f, 4.0f, 3);
             this.myIsPaused = false;
         }
 

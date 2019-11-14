@@ -24,7 +24,7 @@ namespace Pacman
                 Tile tempCurrent = tempWork.Dequeue();
                 if (tempCurrent == tempGoal)
                 {
-                    tempResult = tempCurrent.History; 
+                    tempResult = tempCurrent.History;
                     tempResult.Add(tempCurrent);
                     return tempResult;
                 }

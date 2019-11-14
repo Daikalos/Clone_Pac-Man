@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</SourceFile>
-  <SourceTime>2019-11-04T23:45:41.0964867+01:00</SourceTime>
-  <DestFile>C:/Users/Tobias/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/pacman_walking.xnb</DestFile>
-  <DestTime>2019-11-13T17:07:50.5565033+01:00</DestTime>
+  <SourceFile>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/Sprites/pacman_walking.png</SourceFile>
+  <SourceTime>2019-11-04T14:56:31.6599541+01:00</SourceTime>
+  <DestFile>C:/Users/tobia/Documents/GitHub/Pacman/Pacman/Pacman/Content/bin/Windows/Content/Sprites/pacman_walking.xnb</DestFile>
+  <DestTime>2019-11-14T12:59:41.6378839+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

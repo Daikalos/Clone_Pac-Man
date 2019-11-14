@@ -6,7 +6,7 @@ namespace Pacman
     class GameObject
     {
         protected Texture2D myTexture;
-        protected Vector2 
+        protected Vector2
             myPosition,
             myOrigin;
         protected Rectangle myBoundingBox;

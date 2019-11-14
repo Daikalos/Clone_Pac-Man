@@ -30,15 +30,15 @@ namespace Pacman
         /// 0 = Up; 1 = Left; 2 = Down; 3 = Right;
         /// </summary>
         private int myAngle;
-        private int 
+        private int
             myAIType,
             myWalkToTile,
             myEyesDirection;
-        private float 
+        private float
             mySpeed,
             myCowardTimer,
             myCowardDelay;
-        private bool 
+        private bool
             mySwitchDirection,
             myIsAlive;
 
@@ -334,7 +334,7 @@ namespace Pacman
                 float tempDirection = (float)Math.Atan2(tempYDiff, tempXDiff);
 
                 Vector2 tempDestination = new Vector2(
-                    myBoundingBox.Center.X + Level.TileSize.X * aDistance * (float)Math.Cos(tempDirection), 
+                    myBoundingBox.Center.X + Level.TileSize.X * aDistance * (float)Math.Cos(tempDirection),
                     myBoundingBox.Center.Y + Level.TileSize.Y * aDistance * (float)Math.Sin(tempDirection));
 
                 myPath = Pathfinder.FindPath(myBoundingBox.Center.ToVector2(), tempDestination);

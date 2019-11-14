@@ -9,7 +9,7 @@ namespace Pacman
     {
         private static string[] myLevelBuilder;
         private static Tile[,] myTiles;
-        private static Point 
+        private static Point
             myTileSize,
             myMapSize;
 
@@ -58,7 +58,7 @@ namespace Pacman
                             tempClosest = myTiles[i, j];
                             tempMinDistance = tempDistance;
                         }
-                    }               
+                    }
                 }
             }
             return tempClosest;
@@ -195,10 +195,10 @@ namespace Pacman
             {
                 for (int j = 0; j < myTiles.GetLength(1); j++)
                 {
-                    int 
+                    int
                         tempTileForm = 0,
                         tempDirection = 0;
-                    bool 
+                    bool
                         tempFlip = false,
                         tempHorizontal = false,
                         tempVertical = false;
@@ -247,7 +247,7 @@ namespace Pacman
                                 tempDirection = -1;
                             }
                         }
-                        if (CheckIn(i + 1, j)) 
+                        if (CheckIn(i + 1, j))
                         {
                             if (myTiles[i + 1, j].TileType == '#')
                             {

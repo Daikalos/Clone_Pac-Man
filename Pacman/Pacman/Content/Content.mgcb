@@ -179,6 +179,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tileset/powerup_00_editor.png
 
+#begin Sprites/Tileset/powerup_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/powerup_01.png
+
+#begin Sprites/Tileset/powerup_01_editor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tileset/powerup_01_editor.png
+
 #begin Sprites/Tileset/snack.png
 /importer:TextureImporter
 /processor:TextureProcessor

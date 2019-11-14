@@ -8,11 +8,11 @@ namespace Pacman
 {
     static class GameInfo
     {
-        private static Texture2D 
+        private static Texture2D
             myRect, //Blacks out right side of screen
             myPacMan; //Draw lives
         private static Vector2 myDrawPos;
-        private static string 
+        private static string
             myCurrentLevel,
             myFolderLevels,
             myFolderHighScores;
@@ -115,7 +115,7 @@ namespace Pacman
             StringManager.DrawStringLeft(aSpriteBatch, aFont, "Lives", new Vector2(Level.MapSize.X + 12, 180), Color.DarkOrange, 0.6f);
             for (int i = 0; i < aPlayer.Lives; i++)
             {
-                aSpriteBatch.Draw(myPacMan, new Vector2(Level.MapSize.X + 24 + (i * 32), 200), 
+                aSpriteBatch.Draw(myPacMan, new Vector2(Level.MapSize.X + 24 + (i * 32), 200),
                     new Rectangle(myPacMan.Width / 4, 0, myPacMan.Width / 4, myPacMan.Height), Color.White);
             }
 

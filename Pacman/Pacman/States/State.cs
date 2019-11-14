@@ -12,10 +12,10 @@ namespace Pacman
             this.myGame = aGame;
         }
 
-        public abstract void LoadContent();
-
         public abstract void Update(GameWindow aWindow, GameTime aGameTime);
 
         public abstract void Draw(SpriteBatch aSpriteBatch, GameWindow aWindow, GameTime aGameTime);
+
+        public abstract void LoadContent();
     }
 }

@@ -12,7 +12,8 @@ namespace Pacman
             myBlock,
             mySnack,
             myFruit,
-            myPowerUp,
+            myPowerUp00,
+            myPowerUp01,
             myGhost;
         private SpriteFont my8bitFont;
         private string[] myLevelNames;
@@ -25,7 +26,7 @@ namespace Pacman
         {
             GameInfo.CurrentLevel = "Level_Template.txt";
             Level.LoadLevel(new Point(32));
-            mySelectionAmount = 7;
+            mySelectionAmount = 8;
             aGame.IsMouseVisible = true;
         }
 
@@ -84,24 +85,34 @@ namespace Pacman
             Level.DrawTiles(aSpriteBatch);
 
             StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, ">",
-                new Vector2(Level.MapSize.X + 20, 70 + (40 * mySelection)),
+                new Vector2(Level.MapSize.X + 10, 70 + (40 * mySelection)),
                 Color.GhostWhite, 0.6f);
 
             if (!myLoadLevel)
             {
-                aSpriteBatch.Draw(myBlock, new Vector2(Level.MapSize.X + 50, 70), null, Color.White, 0.0f,
+                aSpriteBatch.Draw(myBlock, new Vector2(Level.MapSize.X + 40, 70), null, Color.White, 0.0f,
                     new Vector2(myBlock.Width / 2, myBlock.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(mySnack, new Vector2(Level.MapSize.X + 50, 110), null, Color.White, 0.0f,
+                aSpriteBatch.Draw(mySnack, new Vector2(Level.MapSize.X + 40, 110), null, Color.White, 0.0f,
                     new Vector2(mySnack.Width / 2, mySnack.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(myFruit, new Vector2(Level.MapSize.X + 50, 150), new Rectangle(0, 0, myFruit.Width / 5, myFruit.Height), Color.White, 0.0f,
+                aSpriteBatch.Draw(myFruit, new Vector2(Level.MapSize.X + 40, 150), new Rectangle(0, 0, myFruit.Width / 5, myFruit.Height), Color.White, 0.0f,
                     new Vector2(myFruit.Width / 10, myFruit.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(myPowerUp, new Vector2(Level.MapSize.X + 50, 230), null, Color.White, 0.0f,
-                    new Vector2(myPowerUp.Width / 2, myPowerUp.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
-                aSpriteBatch.Draw(myGhost, new Vector2(Level.MapSize.X + 50, 270), new Rectangle(0, 0, myGhost.Width / 2, myGhost.Height), Color.White, 0.0f,
+                aSpriteBatch.Draw(myPowerUp00, new Vector2(Level.MapSize.X + 40, 230), null, Color.White, 0.0f,
+                    new Vector2(myPowerUp00.Width / 2, myPowerUp00.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+                aSpriteBatch.Draw(myPowerUp01, new Vector2(Level.MapSize.X + 40, 270), null, Color.White, 0.0f,
+                    new Vector2(myPowerUp01.Width / 2, myPowerUp01.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
+                aSpriteBatch.Draw(myGhost, new Vector2(Level.MapSize.X + 40, 310), new Rectangle(0, 0, myGhost.Width / 2, myGhost.Height), Color.White, 0.0f,
                     new Vector2(myGhost.Width / 4, myGhost.Height / 2), 1.0f, SpriteEffects.None, 0.0f);
 
-                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 40, 310), Color.White, 1.0f);
-                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 40, 350), Color.White, 1.0f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= Block", new Vector2(Level.MapSize.X + 70, 70), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= Snack", new Vector2(Level.MapSize.X + 70, 110), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= Fruits", new Vector2(Level.MapSize.X + 70, 150), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= Void", new Vector2(Level.MapSize.X + 70, 190), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= PU 1", new Vector2(Level.MapSize.X + 70, 230), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= PU 2", new Vector2(Level.MapSize.X + 70, 270), Color.White, 0.5f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "= Ghost", new Vector2(Level.MapSize.X + 70, 310), Color.White, 0.5f);
+
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "LOAD", new Vector2(Level.MapSize.X + 30, 350), Color.White, 1.0f);
+                StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "SAVE", new Vector2(Level.MapSize.X + 30, 390), Color.White, 1.0f);
 
                 StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, "Press return to go back to menu", new Vector2(16, aWindow.ClientBounds.Height - 16), Color.DarkOrange * 0.5f, 0.5f);
             }
@@ -157,7 +168,7 @@ namespace Pacman
             if (KeyMouseReader.KeyPressed(Keys.Back))
             {
                 myLoadLevel = false;
-                mySelectionAmount = 6;
+                mySelectionAmount = 8;
             }
             if (KeyMouseReader.KeyPressed(Keys.Enter) && myLevelNames.Length > 0)
             {
@@ -194,6 +205,9 @@ namespace Pacman
                             mySelectedTile.Item1.TileType = '/';
                             break;
                         case 5:
+                            mySelectedTile.Item1.TileType = '=';
+                            break;
+                        case 6:
                             mySelectedTile.Item1.TileType = '&';
                             break;
                     }
@@ -215,7 +229,8 @@ namespace Pacman
             myBlock = ResourceManager.RequestTexture("Tile_Block-0");
             mySnack = ResourceManager.RequestTexture("Snack");
             myFruit = ResourceManager.RequestTexture("Fruits");
-            myPowerUp = ResourceManager.RequestTexture("PowerUp_00");
+            myPowerUp00 = ResourceManager.RequestTexture("PowerUp_00");
+            myPowerUp01 = ResourceManager.RequestTexture("PowerUp_01");
             myGhost = ResourceManager.RequestTexture("Ghost");
         }
     }

@@ -4,12 +4,13 @@ namespace Pacman
 {
     static class KeyMouseReader
     {
-        public static KeyboardState 
-            myCurrentKeyState, 
+        public static KeyboardState
+            myCurrentKeyState,
             myPreviousKeyState = Keyboard.GetState();
-        public static MouseState 
-            myCurrentMouseState, 
+        public static MouseState
+            myCurrentMouseState,
             myPreviousMouseState = Mouse.GetState();
+
         public static bool KeyPressed(Keys aKey)
         {
             return myCurrentKeyState.IsKeyDown(aKey) && myPreviousKeyState.IsKeyUp(aKey);

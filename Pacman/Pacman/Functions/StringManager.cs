@@ -21,7 +21,7 @@ namespace Pacman
         public static void DrawStringMid(SpriteBatch aSpriteBatch, SpriteFont aFont, string aString, Vector2 aPosition, Color aColor, float aSize)
         {
             aSpriteBatch.DrawString(aFont, aString, new Vector2(
-                aPosition.X - (aFont.MeasureString(aString).X / 2) * aSize, 
+                aPosition.X - (aFont.MeasureString(aString).X / 2) * aSize,
                 aPosition.Y - (aFont.MeasureString(aString).Y / 2) * aSize), aColor, 0.0f, Vector2.Zero, aSize, SpriteEffects.None, 0.0f);
         }
 

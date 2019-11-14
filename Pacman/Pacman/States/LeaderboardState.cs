@@ -8,7 +8,7 @@ namespace Pacman
     class LeaderboardState : State
     {
         private SpriteFont my8bitFont;
-        private string[] 
+        private string[]
             myLevelNames,
             myHighScores;
         private int

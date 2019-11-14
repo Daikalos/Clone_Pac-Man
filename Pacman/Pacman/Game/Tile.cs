@@ -24,7 +24,8 @@ namespace Pacman
         /// - = Empty;
         /// . = Snack;
         /// # = Block;
-        /// / = PowerUp;
+        /// / = PowerUp 0;
+        /// = = PowerUp 1
         /// </summary>
         public char TileType
         {
@@ -33,7 +34,7 @@ namespace Pacman
         }
         public void SetRotation(int aDirection, bool aFlip)
         {
-            switch(aFlip)
+            switch (aFlip)
             {
                 case true:
                     if (aDirection == -1)
@@ -110,7 +111,8 @@ namespace Pacman
         {
             switch (myTileType)
             {
-                case '-': case '&':
+                case '-':
+                case '&':
                     myTexture = ResourceManager.RequestTexture("Empty");
                     break;
                 case '#':
@@ -121,6 +123,9 @@ namespace Pacman
                     break;
                 case '/':
                     myTexture = ResourceManager.RequestTexture("PowerUp_00");
+                    break;
+                case '=':
+                    myTexture = ResourceManager.RequestTexture("PowerUp_01");
                     break;
                 case '^':
                     myTexture = ResourceManager.RequestTexture("Fruits");
@@ -151,6 +156,9 @@ namespace Pacman
                     break;
                 case '/':
                     myTexture = ResourceManager.RequestTexture("PowerUp_00_Editor");
+                    break;
+                case '=':
+                    myTexture = ResourceManager.RequestTexture("PowerUp_01_Editor");
                     break;
                 case '&':
                     myTexture = ResourceManager.RequestTexture("Tile_Ghost");

@@ -90,3 +90,5 @@ C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Cont
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\powerup_00_editor.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\snack_editor.xnb
 C:\Users\Tobias\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\pacman_death.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\powerup_01.xnb
+C:\Users\tobia\Documents\GitHub\Pacman\Pacman\Pacman\bin\Windows\x86\Debug\Content\Sprites\Tileset\powerup_01_editor.xnb

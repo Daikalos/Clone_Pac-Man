@@ -13,7 +13,7 @@ namespace Pacman
         /// 2 = HighScore;
         /// 3 = Exit;
         /// </summary>
-        private int 
+        private int
             mySelection,
             mySelectionAmount;
         private string[] myLevelNames;
@@ -83,8 +83,8 @@ namespace Pacman
         {
             StringManager.DrawStringMid(aSpriteBatch, my8bitFont, "Pac-Man", new Vector2(aWindow.ClientBounds.Width / 2, (aWindow.ClientBounds.Height / 2) - 60), Color.Yellow, 1.8f);
 
-            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, ">", 
-                new Vector2((aWindow.ClientBounds.Width / 2) - 90, (aWindow.ClientBounds.Height / 2) + 20 + (30 * mySelection)), 
+            StringManager.DrawStringLeft(aSpriteBatch, my8bitFont, ">",
+                new Vector2((aWindow.ClientBounds.Width / 2) - 90, (aWindow.ClientBounds.Height / 2) + 20 + (30 * mySelection)),
                 Color.GhostWhite, 0.6f);
 
             if (!myLoadLevel)

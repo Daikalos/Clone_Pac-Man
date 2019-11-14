@@ -12,7 +12,7 @@ namespace Pacman
             isDead
         }
 
-        private AnimationManager 
+        private AnimationManager
             myWalkingAnimation,
             myDeathAnimation;
 
@@ -26,17 +26,18 @@ namespace Pacman
         /// <summary>
         /// 0 = Up; 1 = Left; 2 = Down; 3 = Right;
         /// </summary>
-        private int 
+        private int
             myAngle,
             myLives;
-        private float 
+        private float
             mySpeed,
             myRotation,
-            myEatingTimer,
+            myEatingGhostsTimer,
+            myEatingWallsTimer,
             myEatingDelay,
             myInvincibilityTimer,
             myInvincibilityDelay;
-        private bool 
+        private bool
             mySwitchAngle,
             myIsMoving,
             myIsEatingGhosts,
@@ -115,7 +116,7 @@ namespace Pacman
 
         public void Draw(SpriteBatch aSpriteBatch, GameTime aGameTime)
         {
-            switch(myPlayerState)
+            switch (myPlayerState)
             {
                 case PlayerState.isWalking:
                     if (myIsMoving)
@@ -277,8 +278,16 @@ namespace Pacman
         }
         private bool IsTileBlock(Vector2 aPosition)
         {
-            if (Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y)).Item1.TileType == '#')
+            Tile tempTile = Level.GetTileAtPos(new Vector2(myBoundingBox.Center.X + aPosition.X, myBoundingBox.Center.Y + aPosition.Y)).Item1;
+            if (tempTile.TileType == '#')
             {
+                if (myIsEatingWalls)
+                {
+                    tempTile.TileType = '-';
+                    tempTile.SetTexture();
+
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -295,13 +304,22 @@ namespace Pacman
 
         private void Eating(GameTime aGameTime)
         {
-            if (myEatingTimer > 0)
+            if (myEatingGhostsTimer > 0)
             {
-                myEatingTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+                myEatingGhostsTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
             }
             else
             {
                 myIsEatingGhosts = false;
+            }
+
+            if (myEatingWallsTimer > 0)
+            {
+                myEatingWallsTimer -= (float)aGameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                myIsEatingWalls = false;
             }
         }
 
@@ -355,7 +373,15 @@ namespace Pacman
             if (tempTile.TileType == '/')
             {
                 myIsEatingGhosts = true;
-                myEatingTimer = myEatingDelay;
+                myEatingGhostsTimer = myEatingDelay;
+
+                tempTile.TileType = '-';
+                tempTile.SetTexture();
+            }
+            if (tempTile.TileType == '=')
+            {
+                myIsEatingWalls = true;
+                myEatingWallsTimer = myEatingDelay;
 
                 tempTile.TileType = '-';
                 tempTile.SetTexture();
