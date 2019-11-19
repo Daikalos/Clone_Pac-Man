@@ -40,13 +40,13 @@ namespace Pacman
                 {
                     switch (mySelection)
                     {
-                        case 6:
+                        case 7:
                             myLoadLevel = true;
                             myLevelNames = FileReader.FindFileNames("../../../../Levels/");
                             mySelectionAmount = myLevelNames.Length - 1;
                             mySelection = 0;
                             break;
-                        case 7:
+                        case 8:
                             SaveLevel();
                             break;
                     }
